@@ -14,11 +14,11 @@ export function CarbonBadge({ score, emissions, className, showIcon = true }: Ca
   let colorClass = "bg-zinc-800 text-zinc-300 border-zinc-700";
   
   if (score) {
-    if (['A', 'A+', 'B+'].includes(score)) colorClass = "bg-emerald-500/10 text-emerald-500 border-emerald-500/20";
+    if (['A', 'A+', 'B+'].includes(score)) colorClass = "bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-white border-zinc-200 dark:border-zinc-800";
     else if (['B', 'C+'].includes(score)) colorClass = "bg-yellow-500/10 text-yellow-500 border-yellow-500/20";
     else colorClass = "bg-red-500/10 text-red-500 border-red-500/20";
   } else if (emissions !== undefined) {
-    if (emissions < 1) colorClass = "bg-emerald-500/10 text-emerald-500 border-emerald-500/20";
+    if (emissions < 1) colorClass = "bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-white border-zinc-200 dark:border-zinc-800";
     else if (emissions < 3) colorClass = "bg-yellow-500/10 text-yellow-500 border-yellow-500/20";
     else colorClass = "bg-red-500/10 text-red-500 border-red-500/20";
   }

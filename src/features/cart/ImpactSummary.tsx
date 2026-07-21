@@ -36,7 +36,7 @@ export function ImpactSummary({ totalEmissions, savings }: ImpactSummaryProps) {
         <div className="h-px w-full bg-zinc-800"></div>
 
         <div>
-          <div className="flex items-center justify-between mb-2 text-emerald-500 text-sm font-medium">
+          <div className="flex items-center justify-between mb-2 text-zinc-900 dark:text-white text-sm font-medium">
             <span>Potential Savings</span>
             <Leaf className="w-4 h-4" />
           </div>
@@ -45,11 +45,11 @@ export function ImpactSummary({ totalEmissions, savings }: ImpactSummaryProps) {
               key={savings}
               initial={{ scale: 1.2, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              className="text-3xl font-bold text-emerald-500"
+              className="text-3xl font-bold text-zinc-900 dark:text-white"
             >
               {savings.toFixed(1)}
             </motion.span>
-            <span className="text-emerald-500/50 mb-1">kg CO₂</span>
+            <span className="text-zinc-900 dark:text-white/50 mb-1">kg CO₂</span>
           </div>
         </div>
 

@@ -27,8 +27,8 @@ export default function Hero() {
   return (
     <section className="relative pt-32 pb-24 md:pt-40 md:pb-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16">
       
-      {/* Background Glow */}
-      <div className="absolute top-1/2 left-0 -translate-y-1/2 -z-10 m-auto h-[400px] w-[400px] rounded-full bg-emerald-500 opacity-[0.12] blur-[120px]"></div>
+      {/* Minimal Background (no blurs) */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-zinc-800"></div>
 
       {/* Left Column: Text */}
       <motion.div 
@@ -37,17 +37,16 @@ export default function Hero() {
         animate="show" 
         className="flex-1 text-center lg:text-left flex flex-col items-center lg:items-start relative z-10"
       >
-        <motion.div variants={fadeUp} className="mb-6 inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-500/20 bg-emerald-500/10 text-sm text-emerald-400 font-medium">
+        <motion.div variants={fadeUp} className="mb-6 inline-flex items-center gap-2 px-3 py-1 rounded-full border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 text-sm text-zinc-900 dark:text-zinc-100 font-medium">
           <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-zinc-900 dark:bg-white"></span>
           </span>
           CarbonIQ Engine is Live
         </motion.div>
 
-        <motion.h1 variants={fadeUp} className="font-heading text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white mb-6 leading-[1.1]">
+        <motion.h1 variants={fadeUp} className="font-heading text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-zinc-900 dark:text-white mb-6 leading-[1.1]">
           Shop Smarter.<br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-500">
+          <span className="text-zinc-500 dark:text-zinc-400">
             Shop Greener.
           </span>
         </motion.h1>
@@ -57,14 +56,13 @@ export default function Hero() {
         </motion.p>
 
         <motion.div variants={fadeUp} className="flex flex-col sm:flex-row items-center gap-4 w-full justify-center lg:justify-start">
-          <Link to="/demo" className="group relative inline-flex h-12 w-full sm:w-auto items-center justify-center overflow-hidden rounded-full bg-emerald-500 px-8 py-3 text-base font-semibold text-zinc-950 shadow-[0_0_20px_rgba(16,185,129,0.3)] transition-all hover:bg-emerald-400 hover:shadow-[0_0_30px_rgba(16,185,129,0.5)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500">
-            <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></span>
+          <Link to="/demo" className="group relative inline-flex h-12 w-full sm:w-auto items-center justify-center rounded-lg bg-zinc-900 dark:bg-white px-8 py-3 text-base font-semibold text-white dark:text-zinc-950 transition-all hover:opacity-90 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500">
             <span className="relative flex items-center">
               View Live Demo
               <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </span>
           </Link>
-          <Link to="#features" className="inline-flex h-12 w-full sm:w-auto items-center justify-center rounded-full border border-zinc-700 bg-zinc-900/50 px-8 py-3 text-base font-medium text-white transition-colors hover:bg-zinc-800 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500">
+          <Link to="#features" className="inline-flex h-12 w-full sm:w-auto items-center justify-center rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 px-8 py-3 text-base font-medium text-zinc-900 dark:text-white transition-colors hover:bg-zinc-50 dark:hover:bg-zinc-900 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500">
             Explore Features
           </Link>
         </motion.div>
@@ -77,7 +75,7 @@ export default function Hero() {
         transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
         className="flex-1 w-full max-w-md relative perspective-1000"
       >
-        <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/20 to-cyan-500/20 blur-3xl -z-10 rounded-full"></div>
+        <div className="absolute inset-0 bg-zinc-100 dark:bg-zinc-900 opacity-50 -z-10 rounded-[40px]"></div>
         
         {/* Mock Shopping Interface (e.g. Blinkit/Zepto) */}
         <div className="rounded-3xl border border-zinc-800 bg-white text-zinc-900 overflow-hidden shadow-2xl relative transform transition-transform duration-500 hover:rotate-y-2">
@@ -103,7 +101,7 @@ export default function Hero() {
                     animate={{ top: "100%", opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                    className="absolute left-0 right-0 h-1 bg-emerald-500 shadow-[0_0_15px_rgba(16,185,129,1)] z-10"
+                    className="absolute left-0 right-0 h-0.5 bg-zinc-900 dark:bg-white z-10"
                   />
                 )}
               </AnimatePresence>
@@ -115,11 +113,11 @@ export default function Hero() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="absolute inset-0 bg-emerald-500/10 flex items-center justify-center backdrop-blur-[2px]"
+                    className="absolute inset-0 bg-zinc-100 dark:bg-zinc-900 flex items-center justify-center backdrop-blur-[2px]"
                   >
-                    <div className="bg-zinc-900/90 text-emerald-400 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-2 border border-emerald-500/30">
-                      <ScanLine className="w-3 h-3 animate-pulse" />
-                      Analyzing Carbon Footprint...
+                    <div className="bg-white/90 dark:bg-zinc-900/90 text-zinc-900 dark:text-zinc-100 text-xs font-medium px-3 py-1 rounded-md flex items-center gap-2 border border-zinc-200 dark:border-zinc-800 shadow-sm">
+                      <ScanLine className="w-3 h-3" />
+                      Analyzing...
                     </div>
                   </motion.div>
                 )}
@@ -160,8 +158,8 @@ export default function Hero() {
                 <div className="rounded-2xl border border-zinc-800 bg-zinc-950/95 backdrop-blur-xl p-4 shadow-[0_-10px_40px_rgba(0,0,0,0.5)] relative overflow-hidden">
                   
                   <div className="flex items-center gap-2 mb-4">
-                    <Leaf className="w-5 h-5 text-emerald-500" />
-                    <span className="font-bold text-white text-sm tracking-wide">CarbonIQ Intercept</span>
+                    <Leaf className="w-4 h-4 text-zinc-500" />
+                    <span className="font-medium text-white text-sm tracking-wide">CarbonIQ</span>
                   </div>
 
                   <div className="grid grid-cols-2 gap-3 mb-4">
@@ -183,9 +181,9 @@ export default function Hero() {
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -20 }}
-                        className="rounded-xl border border-emerald-500/40 bg-emerald-500/10 p-3 mb-2 relative"
+                        className="rounded-xl border border-zinc-300 dark:border-zinc-700/40 bg-zinc-100 dark:bg-zinc-900 p-3 mb-2 relative"
                       >
-                        <div className="absolute -top-3 right-3 bg-emerald-500 text-zinc-950 text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider shadow-lg">
+                        <div className="absolute -top-2 right-3 bg-zinc-100 text-zinc-900 text-[10px] font-semibold px-2 py-0.5 rounded-sm uppercase tracking-wider border border-zinc-200">
                           Greener Choice
                         </div>
                         <div className="flex justify-between items-start mb-2">
@@ -196,13 +194,13 @@ export default function Hero() {
                           <span className="text-sm font-bold text-white">₹78</span>
                         </div>
                         
-                        <div className="flex items-center justify-between mt-3 pt-3 border-t border-emerald-500/20">
-                          <div className="flex items-center gap-1 text-emerald-400">
+                        <div className="flex items-center justify-between mt-3 pt-3 border-t border-zinc-200 dark:border-zinc-800">
+                          <div className="flex items-center gap-1 text-zinc-600 dark:text-zinc-400">
                             <TrendingDown className="w-4 h-4" />
                             <span className="text-xs font-bold">Save 1.7 kg CO₂</span>
                           </div>
                           
-                          <button className={`h-8 px-4 rounded-lg font-bold text-xs transition-colors shadow-md ${cycleStep === 4 ? 'bg-emerald-600 text-white' : 'bg-emerald-500 text-zinc-950 hover:bg-emerald-400'}`}>
+                          <button className={`h-8 px-4 rounded-md font-medium text-xs transition-colors shadow-sm ${cycleStep === 4 ? 'bg-zinc-700 text-white' : 'bg-white text-zinc-900 hover:bg-zinc-100'}`}>
                             {cycleStep === 4 ? 'Swapped!' : 'Swap Product'}
                           </button>
                         </div>
@@ -212,10 +210,10 @@ export default function Hero() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="h-[104px] rounded-xl border border-zinc-800 border-dashed bg-zinc-900/50 flex flex-col items-center justify-center mb-2"
+                        className="h-[104px] rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 flex flex-col items-center justify-center mb-2"
                       >
-                        <ScanLine className="w-6 h-6 text-emerald-500/50 mb-2 animate-pulse" />
-                        <span className="text-xs text-zinc-500 font-medium">Generating AI Recommendations...</span>
+                        <ScanLine className="w-5 h-5 text-zinc-400 mb-2" />
+                        <span className="text-xs text-zinc-500 font-medium">Analyzing...</span>
                       </motion.div>
                     )}
                   </AnimatePresence>

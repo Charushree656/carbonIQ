@@ -52,7 +52,7 @@ Authorization: Bearer ciq_live_***
         {/* Request Block */}
         <div className="space-y-4">
           <div className="flex items-center gap-2 text-zinc-300">
-            <Code className="w-5 h-5 text-emerald-500" />
+            <Code className="w-5 h-5 text-zinc-900 dark:text-white" />
             <h3 className="font-semibold text-lg">1. Send Cart Data</h3>
           </div>
           <p className="text-zinc-500 text-sm">Send your user's cart items to our `/analyze-cart` endpoint.</p>
@@ -60,7 +60,7 @@ Authorization: Bearer ciq_live_***
             <div className="bg-zinc-900 border-b border-zinc-800 px-4 py-2 flex items-center gap-2">
               <div className="w-3 h-3 rounded-full bg-red-500"></div>
               <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-              <div className="w-3 h-3 rounded-full bg-emerald-500"></div>
+              <div className="w-3 h-3 rounded-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-950"></div>
               <span className="ml-2 text-xs font-mono text-zinc-500">request.http</span>
             </div>
             <pre className="p-6 text-sm font-mono text-zinc-300 overflow-x-auto whitespace-pre-wrap">
@@ -80,7 +80,7 @@ Authorization: Bearer ciq_live_***
             <div className="bg-zinc-900 border-b border-zinc-800 px-4 py-2 flex items-center gap-2">
               <div className="w-3 h-3 rounded-full bg-red-500"></div>
               <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-              <div className="w-3 h-3 rounded-full bg-emerald-500"></div>
+              <div className="w-3 h-3 rounded-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-950"></div>
               <span className="ml-2 text-xs font-mono text-zinc-500">response.json</span>
             </div>
             <pre className="p-6 text-sm font-mono text-zinc-300 overflow-x-auto whitespace-pre-wrap">

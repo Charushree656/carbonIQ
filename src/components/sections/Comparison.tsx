@@ -81,24 +81,24 @@ export default function Comparison() {
 
             {/* After Optimization */}
             <div className="p-8 md:p-12 relative overflow-hidden group border-t md:border-t-0 md:border-l border-zinc-800">
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(16,185,129,0.15),transparent_70%)]"></div>
+              <div className="absolute inset-0 "></div>
               <div className="relative z-10">
                 <div className="flex items-center gap-2 mb-8">
-                  <CheckCircle2 className="w-5 h-5 text-emerald-500" />
-                  <p className="text-sm font-bold text-emerald-500 uppercase tracking-widest">After CarbonIQ</p>
+                  <CheckCircle2 className="w-5 h-5 text-zinc-900 dark:text-white" />
+                  <p className="text-sm font-bold text-zinc-900 dark:text-white uppercase tracking-widest">After CarbonIQ</p>
                 </div>
                 
                 <div className="space-y-8">
                   <div>
-                    <p className="text-emerald-500/80 mb-2 font-medium">Optimized Carbon Footprint</p>
-                    <p className="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-br from-emerald-400 to-cyan-400">
+                    <p className="text-zinc-900 dark:text-white/80 mb-2 font-medium">Optimized Carbon Footprint</p>
+                    <p className="text-6xl font-black  bg-gradient-to-br from-zinc-400 to-zinc-400">
                       <AnimatedNumber value={14.1} decimal suffix=" kg" />
                     </p>
                   </div>
                   
                   <div>
-                    <p className="text-emerald-500/80 mb-2 font-medium">New Eco Score</p>
-                    <p className="text-5xl font-black text-emerald-400">
+                    <p className="text-zinc-900 dark:text-white/80 mb-2 font-medium">New Eco Score</p>
+                    <p className="text-5xl font-black text-zinc-600 dark:text-zinc-400">
                       <AnimatedNumber value={91} />
                     </p>
                     <div className="w-full h-2 bg-zinc-800 rounded-full mt-4 overflow-hidden">
@@ -107,7 +107,7 @@ export default function Comparison() {
                         whileInView={{ width: "91%" }} 
                         viewport={{ once: true }} 
                         transition={{ duration: 1.5, delay: 0.5 }}
-                        className="h-full bg-emerald-500" 
+                        className="h-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-950" 
                       />
                     </div>
                   </div>
@@ -123,14 +123,14 @@ export default function Comparison() {
           </div>
 
           {/* AI Explanation Footer */}
-          <div className="bg-emerald-500 p-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
+          <div className="bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 p-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
             <div className="flex items-start gap-4">
-              <div className="bg-emerald-950/20 p-2 rounded-full mt-1 shrink-0">
-                <Info className="w-5 h-5 text-emerald-950" />
+              <div className="bg-zinc-950/20 p-2 rounded-full mt-1 shrink-0">
+                <Info className="w-5 h-5 text-zinc-950" />
               </div>
               <div>
-                <p className="text-emerald-950 font-black text-lg mb-1 tracking-tight">34% Emission Reduction Achieved</p>
-                <p className="text-emerald-900 text-sm font-medium leading-relaxed max-w-2xl">
+                <p className="text-zinc-950 font-black text-lg mb-1 tracking-tight">34% Emission Reduction Achieved</p>
+                <p className="text-zinc-900 text-sm font-medium leading-relaxed max-w-2xl">
                   By substituting 3 out of 8 items in the cart with AI-recommended sustainable alternatives, the total carbon footprint was reduced by 7.4 kg without compromising product quality or increasing the total price significantly.
                 </p>
               </div>

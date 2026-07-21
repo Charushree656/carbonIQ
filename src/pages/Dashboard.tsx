@@ -33,9 +33,9 @@ export default function Dashboard() {
         <MetricCard 
           title="Carbon Saved (Today)" 
           value={`${(summary.potentialCarbonSaved / 1000).toFixed(1)}t`} 
-          icon={<Leaf className="text-emerald-500" />}
+          icon={<Leaf className="text-zinc-900 dark:text-white" />}
           trend="+2.4t from yesterday"
-          valueColor="text-emerald-500"
+          valueColor="text-zinc-900 dark:text-white"
         />
         <MetricCard 
           title="Recommendation Acceptance" 

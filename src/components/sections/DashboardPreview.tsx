@@ -58,13 +58,13 @@ export default function DashboardPreview() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
             <div className="p-5 rounded-2xl bg-zinc-950 border border-zinc-800 shadow-inner">
               <p className="text-xs text-zinc-500 mb-2 font-bold uppercase tracking-wider">Carbon Saved (Weekly)</p>
-              <p className="text-3xl font-black text-emerald-400">
+              <p className="text-3xl font-black text-zinc-600 dark:text-zinc-400">
                 <Counter from={0} to={2840} suffix=" kg" />
               </p>
             </div>
             <div className="p-5 rounded-2xl bg-zinc-950 border border-zinc-800 shadow-inner">
               <p className="text-xs text-zinc-500 mb-2 font-bold uppercase tracking-wider">Eco-Purchases</p>
-              <p className="text-3xl font-black text-cyan-400">
+              <p className="text-3xl font-black text-zinc-400">
                 <Counter from={0} to={89} suffix="%" />
               </p>
             </div>
@@ -86,7 +86,7 @@ export default function DashboardPreview() {
             <div className="lg:col-span-2 p-6 rounded-2xl bg-zinc-950 border border-zinc-800 shadow-inner flex flex-col">
               <div className="flex justify-between items-center mb-6">
                 <h3 className="text-lg font-bold text-white font-heading">Weekly Carbon Savings Trend</h3>
-                <span className="px-3 py-1 bg-emerald-500/10 text-emerald-400 text-xs font-bold rounded-full">+14% vs last month</span>
+                <span className="px-3 py-1 bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 text-xs font-bold rounded-full">+14% vs last month</span>
               </div>
               <div className="flex-1 w-full min-h-[250px]">
                 <ResponsiveContainer width="100%" height="100%">
@@ -146,7 +146,7 @@ export default function DashboardPreview() {
                       key={i} 
                       className={`rounded flex items-center justify-center text-[10px] font-bold opacity-80
                         ${i % 3 === 0 ? 'bg-red-500 text-red-950' : 
-                          i % 5 === 0 ? 'bg-yellow-500 text-yellow-950' : 'bg-emerald-500 text-emerald-950'}`}
+                          i % 5 === 0 ? 'bg-yellow-500 text-yellow-950' : 'bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 text-zinc-950'}`}
                     >
                       {i % 3 === 0 ? 'Hi' : i % 5 === 0 ? 'Med' : 'Low'}
                     </div>

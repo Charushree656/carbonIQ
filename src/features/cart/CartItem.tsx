@@ -18,7 +18,7 @@ export function CartItem({ item }: { item: CartItemType }) {
         </div>
         <div>
           <h4 className="text-zinc-100 font-medium">{item.product.name}</h4>
-          <p className="text-zinc-500 text-sm">{item.product.unit} • ${item.product.price.toFixed(2)}</p>
+          <p className="text-zinc-400 text-sm">{item.product.unit} • ₹{item.product.price.toFixed(2)}</p>
         </div>
       </div>
       <div className="flex flex-col items-end gap-2">

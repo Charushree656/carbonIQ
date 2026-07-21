@@ -8,7 +8,7 @@ export default function LogoWall() {
   return (
     <section className="py-16 border-y border-zinc-900 bg-zinc-950/80 relative overflow-hidden">
       {/* Subtle radial gradient background */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-5xl h-32 bg-emerald-500/5 blur-[80px] rounded-full pointer-events-none"></div>
+      
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <p className="text-center text-xs font-bold text-zinc-500 mb-10 uppercase tracking-[0.2em]">
@@ -26,8 +26,8 @@ export default function LogoWall() {
               className="group relative cursor-default"
             >
               {/* Premium Logo Card Mock */}
-              <div className="px-8 py-4 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center justify-center transition-all duration-300 group-hover:-translate-y-2 group-hover:border-emerald-500/50 group-hover:bg-zinc-900/80 group-hover:shadow-[0_10px_30px_rgba(16,185,129,0.15)] filter grayscale group-hover:grayscale-0 opacity-60 group-hover:opacity-100">
-                <span className="font-heading font-black text-xl tracking-tight text-white group-hover:text-emerald-400 transition-colors">
+              <div className="px-8 py-4 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center justify-center transition-all duration-300 group-hover:-translate-y-2 group-hover:border-zinc-200 dark:border-zinc-800 group-hover:bg-zinc-900/80 group-hover:shadow-sm filter grayscale group-hover:grayscale-0 opacity-60 group-hover:opacity-100">
+                <span className="font-heading font-black text-xl tracking-tight text-white group-hover:text-zinc-600 dark:text-zinc-400 transition-colors">
                   {platform}
                 </span>
               </div>

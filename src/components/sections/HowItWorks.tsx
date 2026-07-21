@@ -35,19 +35,19 @@ export default function HowItWorks() {
       icon: <Lightbulb className="w-6 h-6" />,
       title: "Recommendations Appear",
       desc: "Greener alternatives slide in seamlessly.",
-      color: "border-emerald-500/50 bg-emerald-500/10 text-emerald-400"
+      color: "border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400"
     },
     {
       icon: <TrendingDown className="w-6 h-6" />,
       title: "Cart Updates Automatically",
       desc: "Savings counter increases instantly.",
-      color: "border-emerald-500/50 bg-emerald-500/10 text-emerald-400"
+      color: "border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400"
     }
   ];
 
   return (
     <section id="how-it-works" className="py-24 bg-zinc-950 border-y border-zinc-900/50 overflow-hidden relative">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-[400px] bg-emerald-500/5 blur-[120px] rounded-full pointer-events-none"></div>
+      
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
@@ -65,7 +65,7 @@ export default function HowItWorks() {
             
             {/* Moving Light Beam representing data flow */}
             <motion.div 
-              className="absolute left-[-2px] w-[2px] h-32 bg-gradient-to-b from-transparent via-emerald-500 to-transparent shadow-[0_0_10px_rgba(16,185,129,1)]"
+              className="absolute left-[-2px] w-[2px] h-32 bg-gradient-to-b from-transparent via-zinc-500 to-transparent shadow-sm"
               animate={{ top: ["-10%", "110%"] }}
               transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
             />
@@ -75,7 +75,7 @@ export default function HowItWorks() {
                 <div key={index} className="relative pl-10 cursor-pointer" onClick={() => setActiveStep(index)}>
                   
                   {/* Step Node */}
-                  <div className={`absolute left-[-17px] top-1 w-8 h-8 rounded-full border-4 border-zinc-950 flex items-center justify-center transition-colors duration-500 ${activeStep === index ? 'bg-emerald-500' : 'bg-zinc-800'}`}>
+                  <div className={`absolute left-[-17px] top-1 w-8 h-8 rounded-full border-4 border-zinc-950 flex items-center justify-center transition-colors duration-500 ${activeStep === index ? 'bg-zinc-900 dark:bg-white text-white dark:text-zinc-950' : 'bg-zinc-800'}`}>
                     <div className={`w-2 h-2 rounded-full ${activeStep === index ? 'bg-zinc-950' : 'bg-zinc-600'}`}></div>
                   </div>
 
@@ -112,9 +112,9 @@ export default function HowItWorks() {
                 {activeStep === 1 && (
                   <motion.div key="step1" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }} className="text-center relative">
                     <div className="absolute inset-0 bg-purple-500/20 blur-3xl rounded-full"></div>
-                    <ScanLine className="w-24 h-24 text-purple-500 mx-auto mb-6 animate-pulse relative z-10" />
+                    <ScanLine className="w-24 h-24 text-purple-500 mx-auto mb-6  relative z-10" />
                     <h3 className="text-2xl font-bold text-white mb-2 relative z-10">Intercepting Payload</h3>
-                    <p className="text-purple-400 text-sm relative z-10 animate-pulse">Extracting product metadata...</p>
+                    <p className="text-purple-400 text-sm relative z-10 ">Extracting product metadata...</p>
                   </motion.div>
                 )}
 
@@ -123,31 +123,31 @@ export default function HowItWorks() {
                     <div className="flex justify-center items-center gap-6 mb-8">
                       <div className="w-16 h-16 rounded-2xl bg-zinc-800 flex items-center justify-center"><ShoppingBag className="w-8 h-8 text-zinc-500" /></div>
                       <div className="w-16 h-1 border-t-2 border-dashed border-zinc-700 relative overflow-hidden">
-                        <motion.div className="absolute top-[-1px] left-0 h-[2px] w-8 bg-emerald-500" animate={{ left: ["-100%", "100%"] }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }} />
+                        <motion.div className="absolute top-[-1px] left-0 h-[2px] w-8 bg-zinc-900 dark:bg-white text-white dark:text-zinc-950" animate={{ left: ["-100%", "100%"] }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }} />
                       </div>
-                      <div className="w-16 h-16 rounded-2xl border border-emerald-500 bg-emerald-500/10 flex items-center justify-center shadow-[0_0_20px_rgba(16,185,129,0.3)]"><BrainCircuit className="w-8 h-8 text-emerald-500" /></div>
+                      <div className="w-16 h-16 rounded-2xl border border-zinc-300 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-900 flex items-center justify-center shadow-sm"><BrainCircuit className="w-8 h-8 text-zinc-900 dark:text-white" /></div>
                     </div>
                     <h3 className="text-2xl font-bold text-white mb-2">Processing LCA Data</h3>
                     <div className="w-full h-2 bg-zinc-800 rounded-full overflow-hidden mt-6">
-                      <motion.div className="h-full bg-emerald-500" initial={{ width: "0%" }} animate={{ width: "100%" }} transition={{ duration: 2.5, ease: "easeInOut" }} />
+                      <motion.div className="h-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-950" initial={{ width: "0%" }} animate={{ width: "100%" }} transition={{ duration: 2.5, ease: "easeInOut" }} />
                     </div>
                   </motion.div>
                 )}
 
                 {activeStep === 3 && (
                   <motion.div key="step3" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="w-full">
-                    <div className="p-4 rounded-xl border border-emerald-500/30 bg-emerald-500/10 relative overflow-hidden shadow-[0_0_30px_rgba(16,185,129,0.2)]">
-                      <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/20 blur-2xl rounded-full"></div>
+                    <div className="p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 relative overflow-hidden shadow-sm">
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-zinc-100 dark:bg-zinc-900 blur-2xl rounded-full"></div>
                       <div className="flex items-center gap-2 mb-4">
-                        <Lightbulb className="w-5 h-5 text-emerald-400" />
-                        <span className="font-bold text-emerald-400 text-sm tracking-wider uppercase">AI Suggested Swap</span>
+                        <Lightbulb className="w-5 h-5 text-zinc-600 dark:text-zinc-400" />
+                        <span className="font-bold text-zinc-600 dark:text-zinc-400 text-sm tracking-wider uppercase">AI Suggested Swap</span>
                       </div>
                       <div className="flex justify-between items-center bg-zinc-950 p-4 rounded-lg border border-zinc-800">
                         <div>
                           <span className="text-white font-bold block mb-1">Local Organic Alternative</span>
                           <span className="text-xs text-zinc-500">Reduces emissions by 65%</span>
                         </div>
-                        <button className="px-4 py-2 bg-emerald-500 text-zinc-950 text-xs font-bold rounded-lg hover:bg-emerald-400 transition-colors">Apply</button>
+                        <button className="px-4 py-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 text-zinc-950 text-xs font-bold rounded-lg hover:bg-zinc-800 dark:bg-zinc-200 transition-colors">Apply</button>
                       </div>
                     </div>
                   </motion.div>
@@ -155,11 +155,11 @@ export default function HowItWorks() {
 
                 {activeStep === 4 && (
                   <motion.div key="step4" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.8 }} className="text-center">
-                    <div className="w-24 h-24 rounded-full border-4 border-emerald-500 flex items-center justify-center mx-auto mb-6 bg-emerald-500/10 shadow-[0_0_40px_rgba(16,185,129,0.4)]">
-                      <TrendingDown className="w-10 h-10 text-emerald-400" />
+                    <div className="w-24 h-24 rounded-full border-4 border-zinc-300 dark:border-zinc-700 flex items-center justify-center mx-auto mb-6 bg-zinc-100 dark:bg-zinc-900 shadow-sm">
+                      <TrendingDown className="w-10 h-10 text-zinc-600 dark:text-zinc-400" />
                     </div>
                     <h3 className="text-3xl font-bold text-white mb-2 font-heading">Cart Optimized!</h3>
-                    <p className="text-emerald-400 font-medium text-lg">2.5 kg CO₂ Saved</p>
+                    <p className="text-zinc-600 dark:text-zinc-400 font-medium text-lg">2.5 kg CO₂ Saved</p>
                   </motion.div>
                 )}
               </AnimatePresence>
