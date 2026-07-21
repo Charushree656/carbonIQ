@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
 import { useCart } from "@/hooks/useCart";
 import { MOCK_PRODUCTS } from "@/data/mockData";
-import { ShoppingCart, Leaf, CheckCircle2 } from "lucide-react";
+import { ShoppingCart, Leaf, CheckCircle2, Minus, Plus } from "lucide-react";
 
 export default function Shop() {
-  const { addToCart, cart } = useCart();
+  const { addToCart, decreaseQuantity, cart } = useCart();
   const products = Object.values(MOCK_PRODUCTS);
 
   return (
@@ -46,26 +46,29 @@ export default function Shop() {
               
               {(() => {
                 const cartItem = cart.find((item) => item.product.id === product.id);
-                return (
+                return cartItem ? (
+                  <div className="flex items-center gap-3 bg-emerald-500 text-zinc-950 px-2 py-1 rounded-lg font-semibold">
+                    <button 
+                      onClick={() => decreaseQuantity(product)}
+                      className="w-8 h-8 flex items-center justify-center hover:bg-emerald-600 rounded-md transition-colors active:scale-95"
+                    >
+                      <Minus className="w-4 h-4" />
+                    </button>
+                    <span className="w-4 text-center">{cartItem.quantity}</span>
+                    <button 
+                      onClick={() => addToCart(product)}
+                      className="w-8 h-8 flex items-center justify-center hover:bg-emerald-600 rounded-md transition-colors active:scale-95"
+                    >
+                      <Plus className="w-4 h-4" />
+                    </button>
+                  </div>
+                ) : (
                   <button
                     onClick={() => addToCart(product)}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-lg font-semibold transition-colors active:scale-95 ${
-                      cartItem 
-                        ? "bg-emerald-500 hover:bg-emerald-400 text-zinc-950" 
-                        : "bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 hover:bg-zinc-800 dark:hover:bg-zinc-200"
-                    }`}
+                    className="flex items-center gap-2 px-4 py-2 rounded-lg font-semibold transition-colors active:scale-95 bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 hover:bg-zinc-800 dark:hover:bg-zinc-200"
                   >
-                    {cartItem ? (
-                      <>
-                        <CheckCircle2 className="w-4 h-4" />
-                        Added ({cartItem.quantity})
-                      </>
-                    ) : (
-                      <>
-                        <ShoppingCart className="w-4 h-4" />
-                        Add
-                      </>
-                    )}
+                    <ShoppingCart className="w-4 h-4" />
+                    Add
                   </button>
                 );
               })()}

@@ -6,6 +6,7 @@ import { INITIAL_CART } from '../data/mockData';
 interface CartContextType {
   cart: CartItemType[];
   addToCart: (product: Product) => void;
+  decreaseQuantity: (product: Product) => void;
   removeFromCart: (cartItemId: string) => void;
   savings: number;
   activeRecommendations: Recommendation[];
@@ -47,6 +48,24 @@ export function CartProvider({ children }: { children: ReactNode }) {
     });
   };
 
+  const decreaseQuantity = (product: Product) => {
+    setCart(prev => {
+      const existing = prev.find(item => item.product.id === product.id);
+      if (existing) {
+        if (existing.quantity > 1) {
+          return prev.map(item => 
+            item.product.id === product.id 
+              ? { ...item, quantity: item.quantity - 1 }
+              : item
+          );
+        } else {
+          return prev.filter(item => item.product.id !== product.id);
+        }
+      }
+      return prev;
+    });
+  };
+
   const removeFromCart = (cartItemId: string) => {
     setCart(prev => prev.filter(item => item.cartItemId !== cartItemId));
   };
@@ -83,6 +102,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     <CartContext.Provider value={{
       cart,
       addToCart,
+      decreaseQuantity,
       removeFromCart,
       savings,
       activeRecommendations,
