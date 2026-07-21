@@ -1,31 +1,7 @@
-import { motion, useInView, animate } from "framer-motion";
+import { motion } from "framer-motion";
 import { Cpu, ShieldCheck, Lightbulb, Package, Truck, Sparkles } from "lucide-react";
-import { useRef, useEffect, useState } from "react";
 
-function Counter({ from, to, suffix = "", duration = 2 }: { from: number; to: number; suffix?: string; duration?: number }) {
-  const nodeRef = useRef<HTMLSpanElement>(null);
-  const inView = useInView(nodeRef, { once: true });
-  const [hasAnimated, setHasAnimated] = useState(false);
 
-  useEffect(() => {
-    if (inView && !hasAnimated) {
-      const node = nodeRef.current;
-      if (!node) return;
-
-      const controls = animate(from, to, {
-        duration,
-        ease: "easeOut",
-        onUpdate(value) {
-          node.textContent = value.toFixed(0) + suffix;
-        }
-      });
-      setHasAnimated(true);
-      return () => controls.stop();
-    }
-  }, [from, to, inView, suffix, duration, hasAnimated]);
-
-  return <span ref={nodeRef}>{from}{suffix}</span>;
-}
 
 const features = [
   {
