@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
 import { useCart } from "@/hooks/useCart";
 import { MOCK_PRODUCTS } from "@/data/mockData";
-import { ShoppingCart, Leaf } from "lucide-react";
+import { ShoppingCart, Leaf, CheckCircle2 } from "lucide-react";
 
 export default function Shop() {
-  const { addToCart } = useCart();
+  const { addToCart, cart } = useCart();
   const products = Object.values(MOCK_PRODUCTS);
 
   return (
@@ -44,13 +44,31 @@ export default function Shop() {
                 <span className="text-xs text-zinc-500 ml-1">/ {product.unit}</span>
               </div>
               
-              <button
-                onClick={() => addToCart(product)}
-                className="flex items-center gap-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 text-zinc-950 px-4 py-2 rounded-lg font-semibold hover:bg-zinc-800 dark:bg-zinc-200 transition-colors active:scale-95"
-              >
-                <ShoppingCart className="w-4 h-4" />
-                Add
-              </button>
+              {(() => {
+                const cartItem = cart.find((item) => item.product.id === product.id);
+                return (
+                  <button
+                    onClick={() => addToCart(product)}
+                    className={`flex items-center gap-2 px-4 py-2 rounded-lg font-semibold transition-colors active:scale-95 ${
+                      cartItem 
+                        ? "bg-emerald-500 hover:bg-emerald-400 text-zinc-950" 
+                        : "bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 hover:bg-zinc-800 dark:hover:bg-zinc-200"
+                    }`}
+                  >
+                    {cartItem ? (
+                      <>
+                        <CheckCircle2 className="w-4 h-4" />
+                        Added ({cartItem.quantity})
+                      </>
+                    ) : (
+                      <>
+                        <ShoppingCart className="w-4 h-4" />
+                        Add
+                      </>
+                    )}
+                  </button>
+                );
+              })()}
             </div>
           </motion.div>
         ))}
