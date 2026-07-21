@@ -7,7 +7,6 @@ export default function ExtensionDemo() {
 
   return (
     <section className="py-24 bg-zinc-950 border-y border-zinc-900/50 overflow-hidden relative">
-      <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/3 w-[600px] h-[600px] bg-emerald-500/5 blur-[120px] rounded-full pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
@@ -32,8 +31,8 @@ export default function ExtensionDemo() {
               amazon.com/dp/B08F...
             </div>
             <div className="ml-auto flex items-center gap-3">
-              <div className="w-6 h-6 rounded bg-emerald-500/20 border border-emerald-500/50 flex items-center justify-center cursor-pointer shadow-[0_0_10px_rgba(16,185,129,0.3)]">
-                <Leaf className="w-4 h-4 text-emerald-400" />
+              <div className="w-6 h-6 rounded bg-zinc-800 border border-zinc-700 flex items-center justify-center cursor-pointer shadow-sm">
+                <Leaf className="w-4 h-4 text-zinc-400" />
               </div>
             </div>
           </div>
@@ -87,31 +86,31 @@ export default function ExtensionDemo() {
                   initial={{ opacity: 0, y: -20, x: 20 }}
                   animate={{ opacity: 1, y: 0, x: 0 }}
                   exit={{ opacity: 0, y: -20, x: 20 }}
-                  className="absolute top-16 right-16 w-80 rounded-xl bg-zinc-950 border border-emerald-500/50 shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden z-20 flex flex-col"
+                  className="absolute top-16 right-16 w-80 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 shadow-2xl overflow-hidden z-20 flex flex-col"
                 >
-                  <div className="bg-emerald-500 p-3 flex justify-between items-center">
-                    <div className="flex items-center gap-2 text-zinc-950">
-                      <Leaf className="w-5 h-5" />
-                      <span className="font-bold">CarbonIQ Alert</span>
+                  <div className="bg-zinc-100 dark:bg-zinc-900 p-3 flex justify-between items-center border-b border-zinc-200 dark:border-zinc-800">
+                    <div className="flex items-center gap-2 text-zinc-900 dark:text-zinc-100">
+                      <Leaf className="w-4 h-4 text-zinc-500" />
+                      <span className="font-semibold text-sm">CarbonIQ Alert</span>
                     </div>
-                    <X className="w-4 h-4 text-emerald-950 cursor-pointer" />
+                    <X className="w-4 h-4 text-zinc-500 cursor-pointer" />
                   </div>
                   
                   <div className="p-4">
-                    <p className="text-zinc-300 text-sm mb-4">
-                      This detergent generates <span className="font-bold text-red-400">4.5 kg CO₂</span> due to imported heavy liquid shipping.
+                    <p className="text-zinc-600 dark:text-zinc-300 text-sm mb-4">
+                      This detergent generates <span className="font-bold text-red-500">4.5 kg CO₂</span> due to imported heavy liquid shipping.
                     </p>
                     
-                    <div className="p-3 rounded-lg bg-zinc-900 border border-zinc-800 mb-4 cursor-pointer hover:border-emerald-500/50 transition-colors">
-                      <p className="text-xs font-bold text-emerald-500 uppercase tracking-widest mb-1">Greener Alternative</p>
+                    <div className="p-3 rounded-lg bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 mb-4 cursor-pointer hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors">
+                      <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-1">Greener Alternative</p>
                       <div className="flex justify-between items-center">
-                        <span className="font-bold text-white text-sm">Eco Sheets (Local)</span>
-                        <span className="text-emerald-400 font-bold text-sm">₹290</span>
+                        <span className="font-semibold text-zinc-900 dark:text-white text-sm">Eco Sheets (Local)</span>
+                        <span className="text-zinc-900 dark:text-white font-bold text-sm">₹290</span>
                       </div>
                       <p className="text-xs text-zinc-500 mt-1">Saves 3.1 kg CO₂ • Zero Plastic</p>
                     </div>
 
-                    <button className="w-full h-10 rounded-lg bg-emerald-500 text-zinc-950 font-bold text-sm hover:bg-emerald-400 transition-colors flex items-center justify-center gap-2">
+                    <button className="w-full h-10 rounded-lg bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 font-medium text-sm hover:opacity-90 transition-colors flex items-center justify-center gap-2 shadow-sm">
                       Replace & Save Cart
                       <ChevronRight className="w-4 h-4" />
                     </button>

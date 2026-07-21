@@ -5,13 +5,13 @@ export default function BusinessVision() {
   const plans = [
     {
       title: "SaaS Subscription",
-      icon: <Briefcase className="w-6 h-6 text-emerald-500" />,
+      icon: <Briefcase className="w-6 h-6 text-zinc-900 dark:text-white" />,
       desc: "Tiered monthly plans for standard e-commerce platforms.",
       features: ["Up to 1M requests/mo", "Basic Analytics", "Standard UI Widget"]
     },
     {
       title: "Carbon Intelligence API",
-      icon: <Key className="w-6 h-6 text-cyan-500" />,
+      icon: <Key className="w-6 h-6 text-zinc-500" />,
       desc: "Pay-as-you-go access to our carbon footprint LCA database.",
       features: ["Sub-50ms latency", "Custom integrations", "Raw LCA data access"]
     },
@@ -52,7 +52,7 @@ export default function BusinessVision() {
               transition={{ delay: i * 0.1 }}
               className="p-8 rounded-3xl border border-zinc-800 bg-zinc-900/40 relative group overflow-hidden"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/0 to-emerald-500/0 group-hover:from-emerald-500/5 group-hover:to-cyan-500/5 transition-colors"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-zinc-500/0 to-zinc-500/0 group-hover:from-zinc-500/5 group-hover:to-zinc-500/5 transition-colors"></div>
               <div className="w-12 h-12 rounded-xl bg-zinc-950 border border-zinc-800 flex items-center justify-center mb-6 relative z-10">
                 {plan.icon}
               </div>
@@ -62,7 +62,7 @@ export default function BusinessVision() {
               <ul className="space-y-3 relative z-10">
                 {plan.features.map((f, j) => (
                   <li key={j} className="flex items-center gap-2 text-sm text-zinc-300">
-                    <TrendingUp className="w-4 h-4 text-emerald-500" />
+                    <TrendingUp className="w-4 h-4 text-zinc-900 dark:text-white" />
                     {f}
                   </li>
                 ))}
@@ -72,7 +72,7 @@ export default function BusinessVision() {
         </div>
 
         <div className="rounded-3xl border border-zinc-800 bg-zinc-900/50 p-8 md:p-12 text-center overflow-hidden relative">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[300px] bg-emerald-500/10 blur-[100px] rounded-full -z-10"></div>
+          
           
           <h3 className="text-2xl font-bold text-white mb-4 font-heading">Expanding the Horizon</h3>
           <p className="text-zinc-400 mb-10 max-w-2xl mx-auto">
@@ -81,7 +81,7 @@ export default function BusinessVision() {
 
           <div className="flex flex-wrap justify-center gap-4">
             {futureVerticals.map((vert, i) => (
-              <div key={i} className="flex items-center gap-2 px-4 py-2 rounded-full border border-zinc-700 bg-zinc-950/50 text-sm font-medium text-zinc-300 hover:border-emerald-500/50 hover:text-emerald-400 transition-colors">
+              <div key={i} className="flex items-center gap-2 px-4 py-2 rounded-full border border-zinc-700 bg-zinc-950/50 text-sm font-medium text-zinc-300 hover:border-zinc-200 dark:border-zinc-800 hover:text-zinc-600 dark:text-zinc-400 transition-colors">
                 {vert.icon}
                 {vert.name}
               </div>

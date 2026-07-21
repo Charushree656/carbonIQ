@@ -45,12 +45,12 @@ export default function ChatAssistant() {
             className="fixed bottom-24 right-4 sm:right-8 w-[350px] max-w-[calc(100vw-32px)] bg-zinc-950 border border-zinc-800 rounded-2xl shadow-2xl z-50 overflow-hidden flex flex-col"
           >
             {/* Header */}
-            <div className="p-4 bg-emerald-500 flex justify-between items-center">
+            <div className="p-4 bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 flex justify-between items-center">
               <div className="flex items-center gap-2">
-                <Bot className="w-5 h-5 text-emerald-950" />
-                <span className="font-bold text-emerald-950 font-heading tracking-wide">CarbonIQ Assistant</span>
+                <Bot className="w-5 h-5 text-zinc-950" />
+                <span className="font-bold text-zinc-950 font-heading tracking-wide">CarbonIQ Assistant</span>
               </div>
-              <button onClick={() => setIsOpen(false)} className="text-emerald-950 hover:bg-emerald-600/50 p-1 rounded-md transition-colors">
+              <button onClick={() => setIsOpen(false)} className="text-zinc-950 hover:bg-zinc-600/50 p-1 rounded-md transition-colors">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -60,19 +60,19 @@ export default function ChatAssistant() {
               {messages.map((m, i) => (
                 <div key={i} className={`flex gap-3 ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                   {m.role === 'ai' && (
-                    <div className="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center shrink-0">
-                      <Sparkles className="w-4 h-4 text-emerald-500" />
+                    <div className="w-8 h-8 rounded-full bg-zinc-100 dark:bg-zinc-900 flex items-center justify-center shrink-0">
+                      <Sparkles className="w-4 h-4 text-zinc-900 dark:text-white" />
                     </div>
                   )}
-                  <div className={`p-3 rounded-2xl max-w-[80%] text-sm ${m.role === 'user' ? 'bg-emerald-500 text-zinc-950 rounded-tr-sm' : 'bg-zinc-800 text-white rounded-tl-sm'}`}>
+                  <div className={`p-3 rounded-2xl max-w-[80%] text-sm ${m.role === 'user' ? 'bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 text-zinc-950 rounded-tr-sm' : 'bg-zinc-800 text-white rounded-tl-sm'}`}>
                     {m.content}
                   </div>
                 </div>
               ))}
               {isTyping && (
                 <div className="flex gap-3 justify-start">
-                  <div className="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center shrink-0">
-                    <Sparkles className="w-4 h-4 text-emerald-500" />
+                  <div className="w-8 h-8 rounded-full bg-zinc-100 dark:bg-zinc-900 flex items-center justify-center shrink-0">
+                    <Sparkles className="w-4 h-4 text-zinc-900 dark:text-white" />
                   </div>
                   <div className="p-4 rounded-2xl bg-zinc-800 rounded-tl-sm flex gap-1 items-center">
                     <div className="w-1.5 h-1.5 bg-zinc-500 rounded-full animate-bounce"></div>
@@ -104,7 +104,7 @@ export default function ChatAssistant() {
                   disabled 
                   className="flex-1 bg-zinc-900 border border-zinc-800 rounded-lg px-3 text-sm text-zinc-400 cursor-not-allowed"
                 />
-                <button disabled className="w-10 h-10 bg-emerald-500/50 text-zinc-900 rounded-lg flex items-center justify-center cursor-not-allowed">
+                <button disabled className="w-10 h-10 bg-zinc-900 dark:bg-white text-white dark:text-zinc-950/50 text-zinc-900 rounded-lg flex items-center justify-center cursor-not-allowed">
                   <Send className="w-4 h-4" />
                 </button>
               </div>
@@ -115,9 +115,9 @@ export default function ChatAssistant() {
 
       <button 
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-4 sm:right-8 w-14 h-14 bg-emerald-500 rounded-full shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.5)] flex items-center justify-center z-50 transition-transform active:scale-95 group"
+        className="fixed bottom-6 right-4 sm:right-8 w-14 h-14 bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 rounded-full shadow-sm hover:shadow-sm flex items-center justify-center z-50 transition-transform active:scale-95 group"
       >
-        <MessageSquare className="w-6 h-6 text-emerald-950 group-hover:scale-110 transition-transform" />
+        <MessageSquare className="w-6 h-6 text-zinc-950 group-hover:scale-110 transition-transform" />
       </button>
     </>
   );

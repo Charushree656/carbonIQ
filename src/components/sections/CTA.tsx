@@ -5,17 +5,16 @@ export default function CTA() {
   return (
     <section className="py-32 relative overflow-hidden bg-zinc-950 border-t border-zinc-800">
       
-      {/* Dynamic Background */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(16,185,129,0.15),transparent_60%)]"></div>
+      {/* Dynamic Background Removed for minimalism */}
       
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
         
-        <div className="inline-flex items-center justify-center p-3 bg-emerald-500/10 rounded-full mb-8 border border-emerald-500/20">
-          <Zap className="w-6 h-6 text-emerald-500" />
+        <div className="inline-flex items-center justify-center p-3 bg-zinc-100 dark:bg-zinc-900 rounded-full mb-8 border border-zinc-200 dark:border-zinc-800">
+          <Zap className="w-6 h-6 text-zinc-900 dark:text-white" />
         </div>
 
-        <h2 className="font-heading text-4xl md:text-6xl font-black text-white mb-8 tracking-tight">
-          Ready to Make Every Purchase <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">Greener?</span>
+        <h2 className="font-heading text-4xl md:text-6xl font-black text-zinc-900 dark:text-white mb-8 tracking-tight">
+          Ready to Make Every Purchase <span className="text-zinc-500 dark:text-zinc-400">Greener?</span>
         </h2>
         
         <p className="text-xl text-zinc-400 mb-12 max-w-2xl mx-auto leading-relaxed">
@@ -23,14 +22,13 @@ export default function CTA() {
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Link to="/demo" className="group relative inline-flex h-14 w-full sm:w-auto items-center justify-center overflow-hidden rounded-full bg-emerald-500 px-8 py-3 text-lg font-bold text-zinc-950 shadow-[0_0_20px_rgba(16,185,129,0.3)] transition-all hover:bg-emerald-400 hover:shadow-[0_0_40px_rgba(16,185,129,0.6)] active:scale-95 focus-visible:outline-none">
-            <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></span>
+          <Link to="/demo" className="group relative inline-flex h-14 w-full sm:w-auto items-center justify-center rounded-lg bg-zinc-900 dark:bg-white px-8 py-3 text-lg font-bold text-white dark:text-zinc-950 transition-all hover:opacity-90 active:scale-95 focus-visible:outline-none">
             <span className="relative flex items-center">
               Request Demo
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </span>
           </Link>
-          <Link to="/contact" className="inline-flex h-14 w-full sm:w-auto items-center justify-center rounded-full border-2 border-zinc-700 bg-zinc-900/50 px-8 py-3 text-lg font-bold text-white transition-all hover:bg-zinc-800 hover:border-zinc-500 active:scale-95 focus-visible:outline-none">
+          <Link to="/contact" className="inline-flex h-14 w-full sm:w-auto items-center justify-center rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 px-8 py-3 text-lg font-bold text-zinc-900 dark:text-white transition-all hover:bg-zinc-50 dark:hover:bg-zinc-900 active:scale-95 focus-visible:outline-none">
             Partner With Us
           </Link>
         </div>

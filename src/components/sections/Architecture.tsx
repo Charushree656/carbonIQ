@@ -5,10 +5,10 @@ export default function Architecture() {
   const nodes = [
     { id: "user", icon: <User className="w-6 h-6" />, label: "Customer", delay: 0 },
     { id: "platform", icon: <ShoppingBag className="w-6 h-6" />, label: "Shopping Platform", delay: 0.2 },
-    { id: "api", icon: <Code2 className="w-6 h-6 text-emerald-400" />, label: "CarbonIQ API", delay: 0.4 },
-    { id: "engine", icon: <BrainCircuit className="w-6 h-6 text-cyan-400" />, label: "Intelligence Engine", delay: 0.6 },
+    { id: "api", icon: <Code2 className="w-6 h-6 text-zinc-600 dark:text-zinc-400" />, label: "CarbonIQ API", delay: 0.4 },
+    { id: "engine", icon: <BrainCircuit className="w-6 h-6 text-zinc-400" />, label: "Intelligence Engine", delay: 0.6 },
     { id: "db", icon: <Database className="w-6 h-6 text-purple-400" />, label: "LCA Database", delay: 0.8 },
-    { id: "dashboard", icon: <LayoutDashboard className="w-6 h-6 text-emerald-400" />, label: "ESG Dashboard", delay: 1.0 },
+    { id: "dashboard", icon: <LayoutDashboard className="w-6 h-6 text-zinc-600 dark:text-zinc-400" />, label: "ESG Dashboard", delay: 1.0 },
   ];
 
   return (
@@ -33,7 +33,7 @@ export default function Architecture() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: node.delay, type: "spring" }}
-                  className="w-24 h-24 rounded-2xl bg-zinc-900 border border-zinc-700 flex flex-col items-center justify-center gap-2 shadow-xl relative z-10 hover:border-emerald-500/50 transition-colors"
+                  className="w-24 h-24 rounded-2xl bg-zinc-900 border border-zinc-700 flex flex-col items-center justify-center gap-2 shadow-xl relative z-10 hover:border-zinc-200 dark:border-zinc-800 transition-colors"
                 >
                   {node.icon}
                   <span className="text-[10px] font-bold text-zinc-400 text-center px-1 uppercase tracking-wider">{node.label}</span>
@@ -42,7 +42,7 @@ export default function Architecture() {
                   <div className="hidden md:flex items-center text-zinc-600 relative">
                     <ArrowRight className="w-6 h-6" />
                     <motion.div 
-                      className="absolute w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_10px_#10b981]"
+                      className="absolute w-2 h-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 rounded-full shadow-[0_0_10px_#10b981]"
                       animate={{ x: [0, 40], opacity: [0, 1, 0] }}
                       transition={{ duration: 1.5, repeat: Infinity, delay: node.delay }}
                     />

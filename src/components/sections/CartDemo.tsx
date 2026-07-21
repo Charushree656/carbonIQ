@@ -92,12 +92,12 @@ export default function CartDemo() {
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, scale: 0.9 }}
                       transition={{ duration: 0.4 }}
-                      className={`flex justify-between items-center p-4 rounded-xl border transition-colors ${step === 'applied' && 'savings' in item ? 'border-emerald-500/40 bg-emerald-500/10 shadow-[0_0_15px_rgba(16,185,129,0.1)]' : 'border-zinc-800 bg-zinc-900/30'}`}
+                      className={`flex justify-between items-center p-4 rounded-xl border transition-colors ${step === 'applied' && 'savings' in item ? 'border-zinc-300 dark:border-zinc-700/40 bg-zinc-100 dark:bg-zinc-900 shadow-sm' : 'border-zinc-800 bg-zinc-900/30'}`}
                     >
                       <div>
                         <p className="font-bold text-white text-sm">{item.name}</p>
                         {step === 'applied' && 'savings' in item && (
-                          <p className="text-xs font-semibold text-emerald-400 mt-1 flex items-center gap-1 bg-emerald-500/10 px-2 py-0.5 rounded-full inline-flex">
+                          <p className="text-xs font-semibold text-zinc-600 dark:text-zinc-400 mt-1 flex items-center gap-1 bg-zinc-100 dark:bg-zinc-900 px-2 py-0.5 rounded-full inline-flex">
                             <Leaf className="w-3 h-3" /> Saved {item.savings} kg CO₂
                           </p>
                         )}
@@ -127,20 +127,20 @@ export default function CartDemo() {
           </div>
 
           {/* CarbonIQ Interactive Panel */}
-          <div className="rounded-2xl border border-emerald-500/30 bg-zinc-900/90 backdrop-blur-xl p-8 relative overflow-hidden min-h-[550px] flex flex-col shadow-[0_0_40px_rgba(16,185,129,0.1)]">
+          <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-900/90 backdrop-blur-xl p-8 relative overflow-hidden min-h-[550px] flex flex-col shadow-sm">
             <div className="absolute top-0 right-0 p-8 opacity-[0.03] pointer-events-none">
-              <Leaf className="w-64 h-64 text-emerald-500" />
+              <Leaf className="w-64 h-64 text-zinc-900 dark:text-white" />
             </div>
 
             <div className="flex items-center justify-between mb-8 relative z-10">
               <div className="flex items-center gap-2">
-                <Leaf className="w-6 h-6 text-emerald-500" />
+                <Leaf className="w-6 h-6 text-zinc-900 dark:text-white" />
                 <span className="font-heading font-bold text-xl text-white">CarbonIQ Engine</span>
               </div>
               {(step === "analyzing" || step === "analyzed") && (
                 <span className="flex h-3 w-3 relative">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-zinc-800 dark:bg-zinc-200 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-zinc-900 dark:bg-white text-white dark:text-zinc-950"></span>
                 </span>
               )}
             </div>
@@ -153,7 +153,7 @@ export default function CartDemo() {
                 <p className="text-zinc-400 mb-8 font-medium">Waiting to intercept cart payload...</p>
                 <button 
                   onClick={handleSimulate}
-                  className="px-8 py-4 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/20 hover:border-emerald-500/50 transition-all font-bold text-sm flex items-center gap-2 active:scale-95"
+                  className="px-8 py-4 rounded-full bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:bg-zinc-900 hover:border-zinc-200 dark:border-zinc-800 transition-all font-bold text-sm flex items-center gap-2 active:scale-95"
                 >
                   Simulate API Analysis
                 </button>
@@ -165,12 +165,12 @@ export default function CartDemo() {
                 <div className="w-24 h-24 relative mb-8">
                   <div className="absolute inset-0 rounded-full border-4 border-zinc-800"></div>
                   <motion.div 
-                    className="absolute inset-0 rounded-full border-4 border-emerald-500 border-t-transparent border-r-transparent"
+                    className="absolute inset-0 rounded-full border-4 border-zinc-300 dark:border-zinc-700 border-t-transparent border-r-transparent"
                     animate={{ rotate: 360 }}
                     transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                   />
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <Leaf className="w-8 h-8 text-emerald-500 animate-pulse" />
+                    <Leaf className="w-8 h-8 text-zinc-900 dark:text-white " />
                   </div>
                 </div>
                 <div className="h-6 overflow-hidden">
@@ -180,7 +180,7 @@ export default function CartDemo() {
                       initial={{ y: 20, opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
                       exit={{ y: -20, opacity: 0 }}
-                      className="text-emerald-400 font-medium"
+                      className="text-zinc-600 dark:text-zinc-400 font-medium"
                     >
                       {loadingSteps[loadingIndex]}
                     </motion.p>
@@ -188,7 +188,7 @@ export default function CartDemo() {
                 </div>
                 <div className="w-64 h-2 bg-zinc-800 rounded-full mt-8 overflow-hidden">
                   <motion.div 
-                    className="h-full bg-emerald-500"
+                    className="h-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-950"
                     animate={{ width: `${((loadingIndex + 1) / loadingSteps.length) * 100}%` }}
                     transition={{ duration: 0.5 }}
                   />
@@ -214,41 +214,41 @@ export default function CartDemo() {
                 </div>
 
                 <div className="mb-6">
-                  <h4 className="text-xs font-bold text-emerald-500 mb-3 uppercase tracking-widest flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
+                  <h4 className="text-xs font-bold text-zinc-900 dark:text-white mb-3 uppercase tracking-widest flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 rounded-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-950"></div>
                     AI Recommendations Found
                   </h4>
                   <div className="space-y-3">
                     <div className="flex items-center justify-between p-4 rounded-xl bg-zinc-950 border border-zinc-800 shadow-inner">
                       <div className="flex items-center gap-3">
                         <span className="line-through text-zinc-500 text-sm font-medium">Imported Apples</span>
-                        <ArrowDown className="w-4 h-4 text-emerald-500" />
+                        <ArrowDown className="w-4 h-4 text-zinc-900 dark:text-white" />
                         <span className="text-white text-sm font-bold">Local Farm</span>
                       </div>
-                      <span className="text-emerald-400 text-sm font-bold">Save 4.2 kg</span>
+                      <span className="text-zinc-600 dark:text-zinc-400 text-sm font-bold">Save 4.2 kg</span>
                     </div>
                     <div className="flex items-center justify-between p-4 rounded-xl bg-zinc-950 border border-zinc-800 shadow-inner">
                       <div className="flex items-center gap-3">
                         <span className="line-through text-zinc-500 text-sm font-medium">Plastic Bottle</span>
-                        <ArrowDown className="w-4 h-4 text-emerald-500" />
+                        <ArrowDown className="w-4 h-4 text-zinc-900 dark:text-white" />
                         <span className="text-white text-sm font-bold">Glass</span>
                       </div>
-                      <span className="text-emerald-400 text-sm font-bold">Save 1.9 kg</span>
+                      <span className="text-zinc-600 dark:text-zinc-400 text-sm font-bold">Save 1.9 kg</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="mt-auto p-5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 mb-6 relative overflow-hidden">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/20 blur-[40px] rounded-full"></div>
+                <div className="mt-auto p-5 rounded-xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 mb-6 relative overflow-hidden">
+                  
                   <div className="flex justify-between items-center relative z-10">
-                    <span className="text-emerald-500 font-bold uppercase tracking-wider text-xs">Potential Reduction</span>
-                    <span className="text-2xl font-black text-emerald-400">7.4 kg CO₂</span>
+                    <span className="text-zinc-900 dark:text-white font-bold uppercase tracking-wider text-xs">Potential Reduction</span>
+                    <span className="text-2xl font-black text-zinc-600 dark:text-zinc-400">7.4 kg CO₂</span>
                   </div>
                 </div>
 
                 <button 
                   onClick={() => setStep("applied")}
-                  className="w-full h-14 rounded-xl bg-emerald-500 text-zinc-950 font-black text-lg hover:bg-emerald-400 transition-all shadow-[0_0_25px_rgba(16,185,129,0.3)] active:scale-95"
+                  className="w-full h-14 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 text-zinc-950 font-black text-lg hover:bg-zinc-800 dark:bg-zinc-200 transition-all shadow-sm active:scale-95"
                 >
                   Apply AI Recommendations
                 </button>
@@ -262,12 +262,12 @@ export default function CartDemo() {
                 className="flex-1 flex flex-col relative z-10"
               >
                 <div className="flex flex-col items-center justify-center text-center mb-8">
-                  <div className="w-20 h-20 rounded-full bg-emerald-500/20 flex items-center justify-center mb-4 relative">
-                    <div className="absolute inset-0 rounded-full border-2 border-emerald-500/50 animate-ping"></div>
-                    <CheckCircle2 className="w-10 h-10 text-emerald-500" />
+                  <div className="w-20 h-20 rounded-full bg-zinc-100 dark:bg-zinc-900 flex items-center justify-center mb-4 relative">
+                    <div className="absolute inset-0 rounded-full border-2 border-zinc-200 dark:border-zinc-800 animate-ping"></div>
+                    <CheckCircle2 className="w-10 h-10 text-zinc-900 dark:text-white" />
                   </div>
-                  <h3 className="text-3xl font-black text-white mb-2 font-heading text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">Cart Optimized</h3>
-                  <p className="text-emerald-400 font-bold text-lg">You saved 7.4 kg of CO₂ emissions!</p>
+                  <h3 className="text-3xl font-black text-white mb-2 font-heading  text-zinc-500 dark:text-zinc-400">Cart Optimized</h3>
+                  <p className="text-zinc-600 dark:text-zinc-400 font-bold text-lg">You saved 7.4 kg of CO₂ emissions!</p>
                 </div>
                 
                 {/* Environmental Equivalents */}
@@ -275,8 +275,8 @@ export default function CartDemo() {
                   <h4 className="text-xs font-bold text-zinc-500 uppercase tracking-widest mb-4 text-center">Real-World Impact Equivalent</h4>
                   <div className="grid grid-cols-3 gap-2 text-center">
                     <div className="flex flex-col items-center">
-                      <div className="w-10 h-10 rounded-full bg-emerald-500/10 flex items-center justify-center mb-2">
-                        <TreePine className="w-5 h-5 text-emerald-500" />
+                      <div className="w-10 h-10 rounded-full bg-zinc-100 dark:bg-zinc-900 flex items-center justify-center mb-2">
+                        <TreePine className="w-5 h-5 text-zinc-900 dark:text-white" />
                       </div>
                       <p className="text-[10px] text-zinc-400 mb-1">Planting</p>
                       <p className="text-sm font-bold text-white">1 Tree</p>
