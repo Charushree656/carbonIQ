@@ -67,27 +67,27 @@ export default function CartDemo() {
   const steps = [
     {
       icon: <ShoppingBag className="w-5 h-5" />,
-      title: "Shop Normally \uD83D\uDED2",
+      title: "Shop Normally 🛒",
       desc: "CarbonIQ works quietly in the background without changing your shopping experience."
     },
     {
       icon: <ScanLine className="w-5 h-5" />,
-      title: "CarbonIQ AI Scans \uD83E\uDD16",
+      title: "CarbonIQ AI Scans 🤖",
       desc: "Instantly reads packaging, manufacturing region, and transportation data."
     },
     {
       icon: <BrainCircuit className="w-5 h-5" />,
-      title: "Carbon Intelligence \uD83D\uDCCA",
+      title: "Carbon Intelligence 📊",
       desc: "Every product receives a carbon score and eco rating."
     },
     {
       icon: <Leaf className="w-5 h-5" />,
-      title: "AI Recommends \uD83C\uDF31",
+      title: "AI Recommends 🌱",
       desc: "CarbonIQ suggests greener alternatives with similar quality and price."
     },
     {
       icon: <CheckCircle2 className="w-5 h-5" />,
-      title: "Checkout Greener \uD83C\uDF0D",
+      title: "Checkout Greener 🌍",
       desc: "Lower your carbon footprint and track your environmental impact."
     }
   ];
@@ -123,12 +123,7 @@ export default function CartDemo() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-emerald-500/5 blur-[120px] rounded-full pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-20">
-          <h2 className="font-heading text-4xl md:text-5xl font-bold text-white mb-6">How CarbonIQ Works</h2>
-          <p className="text-zinc-400 text-lg">
-            CarbonIQ integrates seamlessly into your favorite shopping platforms, helping you make sustainable choices without changing the way you shop.
-          </p>
-        </div>
+
 
         <div className="flex flex-col lg:flex-row gap-12" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
           
@@ -343,7 +338,7 @@ export default function CartDemo() {
                         >
                           <CheckCircle2 className="w-8 h-8 text-zinc-950" />
                         </motion.div>
-                        <h3 className="text-3xl font-bold text-white mb-2 font-heading">Great Choice! \uD83C\uDF89</h3>
+                        <h3 className="text-3xl font-bold text-white mb-2 font-heading">Great Choice! 🎉</h3>
                         <p className="text-zinc-400">You reduced your shopping footprint by <span className="text-emerald-400 font-bold">15%</span></p>
                       </div>
 
