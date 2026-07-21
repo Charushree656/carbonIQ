@@ -67,33 +67,7 @@ export default function Features() {
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Statistics Row */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-24 border-b border-zinc-800 pb-16">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center">
-            <h4 className="text-4xl md:text-5xl font-heading font-black text-white mb-2">
-              <Counter from={0} to={15} suffix="M+" />
-            </h4>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest">Products Supported</p>
-          </motion.div>
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-center">
-            <h4 className="text-4xl md:text-5xl font-heading font-black text-white mb-2 text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">
-              <Counter from={0} to={95} suffix="%" />
-            </h4>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest">Prediction Accuracy</p>
-          </motion.div>
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="text-center">
-            <h4 className="text-4xl md:text-5xl font-heading font-black text-white mb-2">
-              <Counter from={0} to={500} suffix="K+" />
-            </h4>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest">Daily Analyses</p>
-          </motion.div>
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="text-center">
-            <h4 className="text-4xl md:text-5xl font-heading font-black text-white mb-2">
-              <Counter from={0} to={120} suffix="+" />
-            </h4>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest">Retail Partners</p>
-          </motion.div>
-        </div>
+
 
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
