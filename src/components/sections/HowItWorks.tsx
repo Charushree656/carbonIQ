@@ -1,4 +1,4 @@
-﻿import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { ShoppingBag, ScanLine, BrainCircuit, Leaf, CheckCircle2, Apple, Milk, Package, Droplet, Wheat, ArrowRight, TreePine, Car, Recycle } from "lucide-react";
 import { useState, useEffect } from "react";
 
@@ -67,27 +67,27 @@ export default function HowItWorks() {
   const steps = [
     {
       icon: <ShoppingBag className="w-5 h-5" />,
-      title: "Shop Normally ≡ƒ¢Æ",
+      title: "Shop Normally 🛒",
       desc: "CarbonIQ works quietly in the background without changing your shopping experience."
     },
     {
       icon: <ScanLine className="w-5 h-5" />,
-      title: "CarbonIQ AI Scans ≡ƒñû",
+      title: "CarbonIQ AI Scans 🤖",
       desc: "Instantly reads packaging, manufacturing region, and transportation data."
     },
     {
       icon: <BrainCircuit className="w-5 h-5" />,
-      title: "Carbon Intelligence ≡ƒôè",
+      title: "Carbon Intelligence 📊",
       desc: "Every product receives a carbon score and eco rating."
     },
     {
       icon: <Leaf className="w-5 h-5" />,
-      title: "AI Recommends ≡ƒî▒",
+      title: "AI Recommends 🌱",
       desc: "CarbonIQ suggests greener alternatives with similar quality and price."
     },
     {
       icon: <CheckCircle2 className="w-5 h-5" />,
-      title: "Checkout Greener ≡ƒîì",
+      title: "Checkout Greener 🌍",
       desc: "Lower your carbon footprint and track your environmental impact."
     }
   ];
@@ -228,7 +228,7 @@ export default function HowItWorks() {
                               </div>
                               <div>
                                 <h4 className="text-white font-bold">{product.name}</h4>
-                                <p className="text-zinc-500 text-xs mt-0.5">Qty: 1 ΓÇó {product.pkg}</p>
+                                <p className="text-zinc-500 text-xs mt-0.5">Qty: 1 • {product.pkg}</p>
                               </div>
                             </div>
                             
@@ -242,7 +242,7 @@ export default function HowItWorks() {
                                   className="flex items-center gap-6"
                                 >
                                   <div className="text-right hidden sm:block">
-                                    <div className="text-[10px] text-zinc-500 uppercase tracking-wider mb-0.5">COΓéé Impact</div>
+                                    <div className="text-[10px] text-zinc-500 uppercase tracking-wider mb-0.5">CO₂ Impact</div>
                                     <div className={`font-mono font-bold text-sm ${product.co2 > 4 ? 'text-red-400' : product.co2 > 2 ? 'text-yellow-400' : 'text-emerald-400'}`}>
                                       <AnimatedCounter value={product.co2} suffix=" kg" />
                                     </div>
@@ -303,7 +303,7 @@ export default function HowItWorks() {
                                 <Leaf className="w-4 h-4 text-emerald-400" />
                                 <span className="text-emerald-400 font-bold text-sm">Greener Alternative</span>
                               </div>
-                              <span className="text-xs bg-emerald-500/20 text-emerald-300 px-2 py-1 rounded-full font-bold border border-emerald-500/20">-3.2 kg COΓéé</span>
+                              <span className="text-xs bg-emerald-500/20 text-emerald-300 px-2 py-1 rounded-full font-bold border border-emerald-500/20">-3.2 kg CO₂</span>
                             </div>
                             
                             <div className="p-5">
@@ -313,7 +313,7 @@ export default function HowItWorks() {
                                 </div>
                                 <div>
                                   <h4 className="text-white font-bold">Local Fuji Apples</h4>
-                                  <p className="text-zinc-400 text-xs mt-0.5">Paper packaging ΓÇó Local farm</p>
+                                  <p className="text-zinc-400 text-xs mt-0.5">Paper packaging • Local farm</p>
                                 </div>
                               </div>
 
@@ -346,7 +346,7 @@ export default function HowItWorks() {
                         >
                           <CheckCircle2 className="w-8 h-8 text-zinc-950" />
                         </motion.div>
-                        <h3 className="text-3xl font-bold text-white mb-2 font-heading">Great Choice! ≡ƒÄë</h3>
+                        <h3 className="text-3xl font-bold text-white mb-2 font-heading">Great Choice! 🎉</h3>
                         <p className="text-zinc-400">You reduced your shopping footprint by <span className="text-emerald-400 font-bold">15%</span></p>
                       </div>
 

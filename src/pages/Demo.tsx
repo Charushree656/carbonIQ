@@ -4,7 +4,7 @@ import { useCart } from "@/hooks/useCart";
 import { CartItem } from "@/features/cart/CartItem";
 import { SuggestionCard } from "@/features/recommendations/SuggestionCard";
 import { ImpactSummary } from "@/features/cart/ImpactSummary";
-import { ShieldCheck, ShoppingCart, Loader2, Sparkles, AlertCircle } from "lucide-react";
+import { ShieldCheck, ShoppingCart, Loader2, AlertCircle } from "lucide-react";
 import { aiService } from "@/services/aiService";
 import { Link } from "react-router-dom";
 
@@ -31,7 +31,7 @@ export default function Demo() {
     if (!hasNewUnoptimizedProducts) {
       // If we just removed items or applied a recommendation, we don't need to re-analyze.
       // But we should clean up recommendations for products that are no longer in the cart.
-      setActiveRecommendations(prev => prev.filter(rec => currentProductIds.has(rec.sourceId)));
+      setActiveRecommendations(activeRecommendations.filter((rec: any) => currentProductIds.has(rec.sourceId)));
       return;
     }
 

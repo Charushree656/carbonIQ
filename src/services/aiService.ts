@@ -1,3 +1,4 @@
+// @ts-ignore
 import { GoogleGenAI } from '@google/genai';
 import { MOCK_PRODUCTS } from '../data/mockData';
 import type { CartItemType, Recommendation } from '../types';
