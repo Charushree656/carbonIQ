@@ -1,391 +1,312 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { ShoppingBag, ScanLine, BrainCircuit, Leaf, CheckCircle2, Apple, Milk, Package, Droplet, Wheat, ArrowRight, TreePine, Car, Recycle } from "lucide-react";
 import { useState, useEffect } from "react";
+import { ShoppingCart, ArrowDown, Leaf, CheckCircle2, ScanLine, TreePine, Car, Smartphone } from "lucide-react";
 
-// Helper components for counters
-function AnimatedCounter({ value, suffix = "", prefix = "" }: { value: number, suffix?: string, prefix?: string }) {
-  const [count, setCount] = useState(0);
-  
-  useEffect(() => {
-    let start = count;
-    const duration = 1000;
-    const startTime = performance.now();
-    
-    const animate = (currentTime: number) => {
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      // ease out cubic
-      const ease = 1 - Math.pow(1 - progress, 3);
-      setCount(start + (value - start) * ease);
-      
-      if (progress < 1) {
-        requestAnimationFrame(animate);
-      }
-    };
-    
-    requestAnimationFrame(animate);
-  }, [value]);
+const initialCart = [
+  { id: 1, name: "Imported Apples", price: 340, co2: 8.0, replaceable: true },
+  { id: 2, name: "Potato Chips", price: 60, co2: 1.2, replaceable: false },
+  { id: 3, name: "Plastic Water Bottle", price: 40, co2: 2.1, replaceable: true },
+  { id: 4, name: "Rice (5kg)", price: 450, co2: 4.5, replaceable: false },
+  { id: 5, name: "Chemical Detergent", price: 358, co2: 2.8, replaceable: true },
+];
 
-  return <span>{prefix}{count.toFixed(1).replace('.0', '')}{suffix}</span>;
-}
+const recommendedCart = [
+  { id: 1, name: "Local Farm Apples", price: 290, co2: 3.8, savings: 4.2 },
+  { id: 2, name: "Potato Chips", price: 60, co2: 1.2 },
+  { id: 3, name: "Glass Water Bottle", price: 120, co2: 0.2, savings: 1.9 },
+  { id: 4, name: "Rice (5kg)", price: 450, co2: 4.5 },
+  { id: 5, name: "Eco-Friendly Detergent", price: 380, co2: 1.5, savings: 1.3 },
+];
+
+const loadingSteps = [
+  "Intercepting cart payload...",
+  "Scanning products against LCA database...",
+  "Analyzing packaging materials...",
+  "Calculating transport routes & emissions...",
+  "Generating sustainable recommendations..."
+];
 
 export default function CartDemo() {
-  const [activeStep, setActiveStep] = useState(0);
-  const [isHovered, setIsHovered] = useState(false);
-  const [cartReplaced, setCartReplaced] = useState(false);
-  
-  const scanTexts = ["Detecting products...", "Reading packaging...", "Analyzing transport...", "Calculating emissions..."];
-  const [scanTextIndex, setScanTextIndex] = useState(0);
+  const [step, setStep] = useState<"initial" | "analyzing" | "analyzed" | "applied">("initial");
+  const [loadingIndex, setLoadingIndex] = useState(0);
 
-  // Scan text effect
+  const currentCart = step === "applied" ? recommendedCart : initialCart;
+
   useEffect(() => {
-    if (activeStep === 1) {
-      const interval = setInterval(() => {
-        setScanTextIndex((prev) => (prev + 1) % scanTexts.length);
-      }, 800);
-      return () => clearInterval(interval);
+    let interval: ReturnType<typeof setInterval>;
+    if (step === "analyzing") {
+      interval = setInterval(() => {
+        setLoadingIndex((prev) => {
+          if (prev >= loadingSteps.length - 1) {
+            clearInterval(interval);
+            setStep("analyzed");
+            return 0;
+          }
+          return prev + 1;
+        });
+      }, 1000);
     }
-  }, [activeStep, scanTexts.length]);
+    return () => clearInterval(interval);
+  }, [step]);
 
-  // Step cycle effect
-  useEffect(() => {
-    if (isHovered) return;
-    
-    const cycle = setInterval(() => {
-      setActiveStep((prev) => {
-        if (prev === 4) {
-          setCartReplaced(false);
-          return 0;
-        }
-        return prev + 1;
-      });
-    }, 4500); // 4.5 seconds per step for better reading
-    
-    return () => clearInterval(cycle);
-  }, [isHovered]);
-
-  const steps = [
-    {
-      icon: <ShoppingBag className="w-5 h-5" />,
-      title: "Shop Normally 🛒",
-      desc: "CarbonIQ works quietly in the background without changing your shopping experience."
-    },
-    {
-      icon: <ScanLine className="w-5 h-5" />,
-      title: "CarbonIQ AI Scans 🤖",
-      desc: "Instantly reads packaging, manufacturing region, and transportation data."
-    },
-    {
-      icon: <BrainCircuit className="w-5 h-5" />,
-      title: "Carbon Intelligence 📊",
-      desc: "Every product receives a carbon score and eco rating."
-    },
-    {
-      icon: <Leaf className="w-5 h-5" />,
-      title: "AI Recommends 🌱",
-      desc: "CarbonIQ suggests greener alternatives with similar quality and price."
-    },
-    {
-      icon: <CheckCircle2 className="w-5 h-5" />,
-      title: "Checkout Greener 🌍",
-      desc: "Lower your carbon footprint and track your environmental impact."
-    }
-  ];
-
-  // Cart Data
-  const initialProducts = [
-    { id: 1, name: "Imported Apples", icon: <Apple className="w-6 h-6 text-red-400" />, co2: 4.8, score: 58, rating: "Medium", pkg: "Plastic", trans: "Imported" },
-    { id: 2, name: "Organic Milk", icon: <Milk className="w-6 h-6 text-zinc-200" />, co2: 1.2, score: 85, rating: "Good", pkg: "Carton", trans: "Local" },
-    { id: 3, name: "Potato Chips", icon: <Package className="w-6 h-6 text-yellow-400" />, co2: 2.1, score: 65, rating: "Medium", pkg: "Plastic", trans: "National" },
-    { id: 4, name: "Bottled Water", icon: <Droplet className="w-6 h-6 text-blue-400" />, co2: 3.5, score: 40, rating: "Poor", pkg: "PET Plastic", trans: "National" },
-    { id: 5, name: "Premium Rice", icon: <Wheat className="w-6 h-6 text-orange-200" />, co2: 9.9, score: 35, rating: "Poor", pkg: "Plastic", trans: "Imported" },
-  ];
-
-  const replacedProduct = { id: 1, name: "Local Fuji Apples", icon: <Apple className="w-6 h-6 text-emerald-400" />, co2: 1.6, score: 92, rating: "Excellent", pkg: "Paper", trans: "Local" };
-
-  const displayProducts = cartReplaced 
-    ? [replacedProduct, ...initialProducts.slice(1)]
-    : initialProducts;
-
-  const totalCo2Before = initialProducts.reduce((acc, curr) => acc + curr.co2, 0);
-  const totalCo2After = replacedProduct.co2 + initialProducts.slice(1).reduce((acc, curr) => acc + curr.co2, 0);
-  
-  const handleReplace = () => {
-    setCartReplaced(true);
-    setTimeout(() => {
-      setActiveStep(4);
-    }, 1000);
+  const handleSimulate = () => {
+    setLoadingIndex(0);
+    setStep("analyzing");
   };
 
   return (
-    <section id="demo" className="py-24 bg-zinc-950 overflow-hidden relative">
-      {/* Background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-emerald-500/5 blur-[120px] rounded-full pointer-events-none"></div>
+    <section id="demo" className="py-24 relative overflow-hidden bg-zinc-950">
+      
+      {/* Premium background particles simulation */}
+      <div className="absolute inset-0 z-0 opacity-20" style={{ background: 'radial-gradient(circle at center, transparent 0%, #09090b 100%), url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%2310b981\' fill-opacity=\'0.2\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")' }}></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <h2 className="font-heading text-3xl md:text-5xl font-bold text-white mb-6">Experience the AI Engine.</h2>
+          <p className="text-zinc-400 text-lg">
+            See how CarbonIQ seamlessly intercepts a standard shopping cart and transforms it into a climate-conscious purchase.
+          </p>
+        </div>
 
-
-        <div className="flex flex-col lg:flex-row gap-12" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
           
-          {/* Left Column: Steps */}
-          <div className="flex-1 w-full max-w-md relative pb-8 z-20">
-            {/* Timeline Line */}
-            <div className="absolute left-6 top-6 bottom-6 w-[2px] bg-zinc-800 rounded-full">
-              <motion.div 
-                className="absolute top-0 left-0 w-full bg-emerald-500 rounded-full"
-                animate={{ height: `${(activeStep / 4) * 100}%` }}
-                transition={{ duration: 0.5, ease: "easeInOut" }}
-              />
+          {/* Mock Cart UI */}
+          <div className="rounded-2xl border border-zinc-800 bg-zinc-950/80 backdrop-blur-md shadow-2xl overflow-hidden hover:border-zinc-700 transition-colors">
+            <div className="p-4 border-b border-zinc-800 bg-zinc-900/50 flex justify-between items-center">
+              <div className="flex items-center gap-2">
+                <ShoppingCart className="w-5 h-5 text-zinc-400" />
+                <span className="font-bold text-white">Your Cart</span>
+              </div>
+              <span className="text-sm font-medium text-zinc-400">{currentCart.length} Items</span>
+            </div>
+            
+            <div className="p-6">
+              <div className="space-y-4 mb-6 relative min-h-[300px]">
+                <AnimatePresence mode="popLayout">
+                  {currentCart.map((item) => (
+                    <motion.div 
+                      key={item.name}
+                      layout
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, scale: 0.9 }}
+                      transition={{ duration: 0.4 }}
+                      className={`flex justify-between items-center p-4 rounded-xl border transition-colors ${step === 'applied' && 'savings' in item ? 'border-emerald-500/40 bg-emerald-500/10 shadow-[0_0_15px_rgba(16,185,129,0.1)]' : 'border-zinc-800 bg-zinc-900/30'}`}
+                    >
+                      <div>
+                        <p className="font-bold text-white text-sm">{item.name}</p>
+                        {step === 'applied' && 'savings' in item && (
+                          <p className="text-xs font-semibold text-emerald-400 mt-1 flex items-center gap-1 bg-emerald-500/10 px-2 py-0.5 rounded-full inline-flex">
+                            <Leaf className="w-3 h-3" /> Saved {item.savings} kg CO₂
+                          </p>
+                        )}
+                      </div>
+                      <span className="font-bold text-zinc-300">₹{item.price}</span>
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
+              </div>
+
+              <div className="pt-4 border-t border-zinc-800 flex justify-between items-center mb-6">
+                <span className="text-zinc-400">Total</span>
+                <span className="font-bold text-3xl text-white">
+                  ₹{currentCart.reduce((acc, curr) => acc + curr.price, 0)}
+                </span>
+              </div>
+
+              {step === "initial" && (
+                <button 
+                  onClick={handleSimulate}
+                  className="w-full h-14 rounded-xl bg-zinc-100 text-zinc-900 font-bold hover:bg-white transition-all active:scale-95 text-lg shadow-xl"
+                >
+                  Checkout
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* CarbonIQ Interactive Panel */}
+          <div className="rounded-2xl border border-emerald-500/30 bg-zinc-900/90 backdrop-blur-xl p-8 relative overflow-hidden min-h-[550px] flex flex-col shadow-[0_0_40px_rgba(16,185,129,0.1)]">
+            <div className="absolute top-0 right-0 p-8 opacity-[0.03] pointer-events-none">
+              <Leaf className="w-64 h-64 text-emerald-500" />
             </div>
 
-            <div className="space-y-6">
-              {steps.map((step, index) => {
-                const isActive = activeStep === index;
-                const isPast = activeStep > index;
-                
-                return (
-                  <div 
-                    key={index} 
-                    className={`relative pl-16 py-2 cursor-pointer group transition-all duration-300 ${isActive ? 'opacity-100' : 'opacity-50 hover:opacity-100'}`}
-                    onClick={() => {
-                      setActiveStep(index);
-                      if (index < 3) setCartReplaced(false);
-                    }}
-                  >
-                    {/* Step Node */}
-                    <div className={`absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all duration-300 bg-zinc-950 ${isActive || isPast ? 'border-emerald-500' : 'border-zinc-700'}`}>
-                      {(isActive || isPast) && <div className="w-2 h-2 rounded-full bg-emerald-500" />}
-                    </div>
+            <div className="flex items-center justify-between mb-8 relative z-10">
+              <div className="flex items-center gap-2">
+                <Leaf className="w-6 h-6 text-emerald-500" />
+                <span className="font-heading font-bold text-xl text-white">CarbonIQ Engine</span>
+              </div>
+              {(step === "analyzing" || step === "analyzed") && (
+                <span className="flex h-3 w-3 relative">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                </span>
+              )}
+            </div>
 
-                    <div className={`p-5 rounded-2xl border transition-all duration-300 ${isActive ? 'border-emerald-500/30 bg-emerald-500/5 shadow-[0_0_20px_rgba(16,185,129,0.1)]' : 'border-transparent bg-transparent hover:bg-zinc-900/50'}`}>
-                      <h3 className={`text-xl font-bold font-heading mb-2 ${isActive ? 'text-white' : 'text-zinc-300'}`}>{step.title}</h3>
-                      <AnimatePresence>
-                        {isActive && (
-                          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                            <p className="text-zinc-400 text-sm leading-relaxed mt-2">{step.desc}</p>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
+            {step === "initial" && (
+              <div className="flex-1 flex flex-col items-center justify-center text-center relative z-10">
+                <div className="w-20 h-20 rounded-full border border-zinc-800 bg-zinc-900 flex items-center justify-center mb-6">
+                  <ScanLine className="w-10 h-10 text-zinc-600" />
+                </div>
+                <p className="text-zinc-400 mb-8 font-medium">Waiting to intercept cart payload...</p>
+                <button 
+                  onClick={handleSimulate}
+                  className="px-8 py-4 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/20 hover:border-emerald-500/50 transition-all font-bold text-sm flex items-center gap-2 active:scale-95"
+                >
+                  Simulate API Analysis
+                </button>
+              </div>
+            )}
+
+            {step === "analyzing" && (
+              <div className="flex-1 flex flex-col items-center justify-center text-center relative z-10">
+                <div className="w-24 h-24 relative mb-8">
+                  <div className="absolute inset-0 rounded-full border-4 border-zinc-800"></div>
+                  <motion.div 
+                    className="absolute inset-0 rounded-full border-4 border-emerald-500 border-t-transparent border-r-transparent"
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <Leaf className="w-8 h-8 text-emerald-500 animate-pulse" />
+                  </div>
+                </div>
+                <div className="h-6 overflow-hidden">
+                  <AnimatePresence mode="wait">
+                    <motion.p 
+                      key={loadingIndex}
+                      initial={{ y: 20, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={{ y: -20, opacity: 0 }}
+                      className="text-emerald-400 font-medium"
+                    >
+                      {loadingSteps[loadingIndex]}
+                    </motion.p>
+                  </AnimatePresence>
+                </div>
+                <div className="w-64 h-2 bg-zinc-800 rounded-full mt-8 overflow-hidden">
+                  <motion.div 
+                    className="h-full bg-emerald-500"
+                    animate={{ width: `${((loadingIndex + 1) / loadingSteps.length) * 100}%` }}
+                    transition={{ duration: 0.5 }}
+                  />
+                </div>
+              </div>
+            )}
+
+            {step === "analyzed" && (
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="flex-1 flex flex-col relative z-10"
+              >
+                <div className="grid grid-cols-2 gap-4 mb-6">
+                  <div className="p-4 rounded-xl border border-red-500/20 bg-red-500/5">
+                    <p className="text-xs font-bold text-red-500/80 mb-1 uppercase tracking-wider">Carbon Footprint</p>
+                    <p className="text-3xl font-black text-red-500">18.6 <span className="text-base font-normal text-red-400">kg CO₂</span></p>
+                  </div>
+                  <div className="p-4 rounded-xl border border-yellow-500/20 bg-yellow-500/5">
+                    <p className="text-xs font-bold text-yellow-500/80 mb-1 uppercase tracking-wider">Eco Score</p>
+                    <p className="text-3xl font-black text-yellow-500">69 <span className="text-base font-normal text-yellow-400">/100</span></p>
+                  </div>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-xs font-bold text-emerald-500 mb-3 uppercase tracking-widest flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
+                    AI Recommendations Found
+                  </h4>
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between p-4 rounded-xl bg-zinc-950 border border-zinc-800 shadow-inner">
+                      <div className="flex items-center gap-3">
+                        <span className="line-through text-zinc-500 text-sm font-medium">Imported Apples</span>
+                        <ArrowDown className="w-4 h-4 text-emerald-500" />
+                        <span className="text-white text-sm font-bold">Local Farm</span>
+                      </div>
+                      <span className="text-emerald-400 text-sm font-bold">Save 4.2 kg</span>
+                    </div>
+                    <div className="flex items-center justify-between p-4 rounded-xl bg-zinc-950 border border-zinc-800 shadow-inner">
+                      <div className="flex items-center gap-3">
+                        <span className="line-through text-zinc-500 text-sm font-medium">Plastic Bottle</span>
+                        <ArrowDown className="w-4 h-4 text-emerald-500" />
+                        <span className="text-white text-sm font-bold">Glass</span>
+                      </div>
+                      <span className="text-emerald-400 text-sm font-bold">Save 1.9 kg</span>
                     </div>
                   </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Right Column: Visualizer */}
-          <div className="flex-[1.5] w-full min-h-[500px] lg:min-h-[650px] relative perspective-1000">
-            <div className="w-full h-full rounded-3xl border border-zinc-800 bg-zinc-900/50 backdrop-blur-xl p-6 md:p-8 overflow-hidden shadow-2xl relative flex flex-col">
-              
-              {/* Fake Browser Header */}
-              <div className="flex items-center gap-2 mb-8 border-b border-zinc-800 pb-4">
-                <div className="flex gap-1.5">
-                  <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
-                  <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-                  <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
                 </div>
-                <div className="mx-auto bg-zinc-950 rounded-md px-4 py-1.5 text-xs text-zinc-500 flex items-center gap-2 border border-zinc-800 w-full max-w-[200px] justify-center">
-                  <ShoppingBag className="w-3 h-3" /> checkout.com/cart
-                </div>
-              </div>
 
-              <div className="flex-1 relative">
+                <div className="mt-auto p-5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 mb-6 relative overflow-hidden">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/20 blur-[40px] rounded-full"></div>
+                  <div className="flex justify-between items-center relative z-10">
+                    <span className="text-emerald-500 font-bold uppercase tracking-wider text-xs">Potential Reduction</span>
+                    <span className="text-2xl font-black text-emerald-400">7.4 kg CO₂</span>
+                  </div>
+                </div>
+
+                <button 
+                  onClick={() => setStep("applied")}
+                  className="w-full h-14 rounded-xl bg-emerald-500 text-zinc-950 font-black text-lg hover:bg-emerald-400 transition-all shadow-[0_0_25px_rgba(16,185,129,0.3)] active:scale-95"
+                >
+                  Apply AI Recommendations
+                </button>
+              </motion.div>
+            )}
+
+            {step === "applied" && (
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="flex-1 flex flex-col relative z-10"
+              >
+                <div className="flex flex-col items-center justify-center text-center mb-8">
+                  <div className="w-20 h-20 rounded-full bg-emerald-500/20 flex items-center justify-center mb-4 relative">
+                    <div className="absolute inset-0 rounded-full border-2 border-emerald-500/50 animate-ping"></div>
+                    <CheckCircle2 className="w-10 h-10 text-emerald-500" />
+                  </div>
+                  <h3 className="text-3xl font-black text-white mb-2 font-heading text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">Cart Optimized</h3>
+                  <p className="text-emerald-400 font-bold text-lg">You saved 7.4 kg of CO₂ emissions!</p>
+                </div>
                 
-                {/* 
-                  Steps 1-4 share the same Cart layout, just different overlays.
-                  Step 5 is entirely different (Checkout screen).
-                */}
-                <AnimatePresence mode="wait">
-                  
-                  {activeStep < 4 ? (
-                    <motion.div key="cart-view" className="h-full flex flex-col gap-4 relative" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                      
-                      <div className="flex justify-between items-end mb-2">
-                        <h3 className="text-2xl font-bold text-white font-heading">Your Cart (5 items)</h3>
+                {/* Environmental Equivalents */}
+                <div className="bg-zinc-950 border border-zinc-800 rounded-xl p-5 mb-8">
+                  <h4 className="text-xs font-bold text-zinc-500 uppercase tracking-widest mb-4 text-center">Real-World Impact Equivalent</h4>
+                  <div className="grid grid-cols-3 gap-2 text-center">
+                    <div className="flex flex-col items-center">
+                      <div className="w-10 h-10 rounded-full bg-emerald-500/10 flex items-center justify-center mb-2">
+                        <TreePine className="w-5 h-5 text-emerald-500" />
                       </div>
-
-                      <div className="space-y-3 relative z-10 flex-1">
-                        {displayProducts.map((product, idx) => (
-                          <motion.div 
-                            key={product.id + (product.name === "Local Fuji Apples" ? '-replaced' : '')}
-                            initial={activeStep === 0 ? { opacity: 0, x: 20 } : false}
-                            animate={activeStep === 0 ? { opacity: 1, x: 0 } : false}
-                            transition={{ delay: idx * 0.1 }}
-                            layout
-                            className={`flex items-center justify-between p-4 rounded-xl border ${product.name === "Local Fuji Apples" ? 'border-emerald-500/50 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950/50'} relative overflow-hidden`}
-                          >
-                            <div className="flex items-center gap-4">
-                              <div className="w-12 h-12 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center">
-                                {product.icon}
-                              </div>
-                              <div>
-                                <h4 className="text-white font-bold">{product.name}</h4>
-                                <p className="text-zinc-500 text-xs mt-0.5">Qty: 1 • {product.pkg}</p>
-                              </div>
-                            </div>
-                            
-                            {/* Step 3: Carbon Intelligence Overlay */}
-                            <AnimatePresence>
-                              {activeStep >= 2 && (
-                                <motion.div 
-                                  initial={{ opacity: 0, scale: 0.9, x: 10 }}
-                                  animate={{ opacity: 1, scale: 1, x: 0 }}
-                                  transition={{ delay: activeStep === 2 ? idx * 0.15 : 0 }}
-                                  className="flex items-center gap-6"
-                                >
-                                  <div className="text-right hidden sm:block">
-                                    <div className="text-[10px] text-zinc-500 uppercase tracking-wider mb-0.5">CO₂ Impact</div>
-                                    <div className={`font-mono font-bold text-sm ${product.co2 > 4 ? 'text-red-400' : product.co2 > 2 ? 'text-yellow-400' : 'text-emerald-400'}`}>
-                                      <AnimatedCounter value={product.co2} suffix=" kg" />
-                                    </div>
-                                  </div>
-                                  <div className="text-right">
-                                    <div className="text-[10px] text-zinc-500 uppercase tracking-wider mb-0.5">Score</div>
-                                    <div className={`font-mono text-lg font-bold ${product.score < 50 ? 'text-red-400' : product.score < 75 ? 'text-yellow-400' : 'text-emerald-400'}`}>
-                                      <AnimatedCounter value={product.score} />
-                                    </div>
-                                  </div>
-                                </motion.div>
-                              )}
-                            </AnimatePresence>
-
-                          </motion.div>
-                        ))}
+                      <p className="text-[10px] text-zinc-400 mb-1">Planting</p>
+                      <p className="text-sm font-bold text-white">1 Tree</p>
+                    </div>
+                    <div className="flex flex-col items-center border-x border-zinc-800">
+                      <div className="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center mb-2">
+                        <Car className="w-5 h-5 text-blue-500" />
                       </div>
-
-                      {/* Step 2: Scanning Overlay */}
-                      <AnimatePresence>
-                        {activeStep === 1 && (
-                          <motion.div 
-                            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                            className="absolute inset-0 z-20 pointer-events-none overflow-hidden rounded-xl border border-emerald-500/20"
-                          >
-                            <div className="absolute inset-0 bg-emerald-500/5 backdrop-blur-[1px]"></div>
-                            <motion.div 
-                              className="absolute left-0 right-0 h-[2px] bg-emerald-400 shadow-[0_0_15px_2px_rgba(52,211,153,0.8)]"
-                              animate={{ top: ["0%", "100%", "0%"] }}
-                              transition={{ duration: 3, ease: "linear", repeat: Infinity }}
-                            />
-                            
-                            {/* Scanning text changing rapidly */}
-                            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-zinc-950/80 backdrop-blur-md px-4 py-2 rounded-full border border-emerald-500/30 flex items-center gap-2 text-emerald-400 text-sm font-mono">
-                              <ScanLine className="w-4 h-4 animate-pulse" />
-                              <motion.span
-                                key={scanTextIndex}
-                                initial={{ opacity: 0.5 }}
-                                animate={{ opacity: 1 }}
-                                transition={{ duration: 0.2 }}
-                              >
-                                {scanTexts[scanTextIndex]}
-                              </motion.span>
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-
-                      {/* Step 4: AI Recommendation Overlay */}
-                      <AnimatePresence>
-                        {activeStep === 3 && !cartReplaced && (
-                          <motion.div 
-                            initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, scale: 0.95 }}
-                            className="absolute top-8 right-0 md:right-[-20px] w-[calc(100%-20px)] md:w-80 bg-zinc-900 border border-emerald-500/50 rounded-2xl shadow-2xl z-30 overflow-hidden"
-                          >
-                            <div className="bg-emerald-500/10 px-4 py-3 border-b border-emerald-500/20 flex justify-between items-center">
-                              <div className="flex items-center gap-2">
-                                <Leaf className="w-4 h-4 text-emerald-400" />
-                                <span className="text-emerald-400 font-bold text-sm">Greener Alternative</span>
-                              </div>
-                              <span className="text-xs bg-emerald-500/20 text-emerald-300 px-2 py-1 rounded-full font-bold border border-emerald-500/20">-3.2 kg CO₂</span>
-                            </div>
-                            
-                            <div className="p-5">
-                              <div className="flex items-center gap-4 mb-4">
-                                <div className="w-12 h-12 rounded-lg bg-zinc-950 border border-zinc-800 flex items-center justify-center shadow-inner">
-                                  <Apple className="w-6 h-6 text-emerald-400" />
-                                </div>
-                                <div>
-                                  <h4 className="text-white font-bold">Local Fuji Apples</h4>
-                                  <p className="text-zinc-400 text-xs mt-0.5">Paper packaging • Local farm</p>
-                                </div>
-                              </div>
-
-                              <div className="bg-zinc-950 rounded-lg p-3 text-xs text-zinc-400 mb-4 leading-relaxed border border-zinc-800">
-                                Locally sourced apples reduce transportation emissions by over 60% while maintaining similar quality.
-                              </div>
-
-                              <button 
-                                onClick={handleReplace}
-                                className="w-full py-2.5 bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-bold rounded-xl transition-all shadow-[0_0_20px_rgba(16,185,129,0.2)] hover:shadow-[0_0_30px_rgba(16,185,129,0.4)] flex items-center justify-center gap-2 group text-sm"
-                              >
-                                Replace & Save <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                              </button>
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                      
-                    </motion.div>
-                  ) : (
-                    
-                    // Step 5: Checkout Summary
-                    <motion.div key="checkout-view" className="h-full flex flex-col justify-center relative" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}>
-                      <div className="absolute inset-0 bg-gradient-to-t from-emerald-500/10 to-transparent rounded-2xl pointer-events-none"></div>
-                      
-                      <div className="text-center mb-10">
-                        <motion.div 
-                          initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", bounce: 0.5 }}
-                          className="w-16 h-16 bg-emerald-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-[0_0_40px_rgba(16,185,129,0.4)]"
-                        >
-                          <CheckCircle2 className="w-8 h-8 text-zinc-950" />
-                        </motion.div>
-                        <h3 className="text-3xl font-bold text-white mb-2 font-heading">Great Choice! 🎉</h3>
-                        <p className="text-zinc-400">You reduced your shopping footprint by <span className="text-emerald-400 font-bold">15%</span></p>
+                      <p className="text-[10px] text-zinc-400 mb-1">Driving</p>
+                      <p className="text-sm font-bold text-white">30 km</p>
+                    </div>
+                    <div className="flex flex-col items-center">
+                      <div className="w-10 h-10 rounded-full bg-purple-500/10 flex items-center justify-center mb-2">
+                        <Smartphone className="w-5 h-5 text-purple-500" />
                       </div>
+                      <p className="text-[10px] text-zinc-400 mb-1">Charging</p>
+                      <p className="text-sm font-bold text-white">900 Phones</p>
+                    </div>
+                  </div>
+                </div>
 
-                      <div className="grid grid-cols-2 gap-4 md:gap-8 mb-10 max-w-md mx-auto w-full">
-                        <div className="bg-zinc-950 p-6 rounded-2xl border border-zinc-800 text-center relative overflow-hidden group">
-                          <div className="absolute inset-0 bg-red-500/5 group-hover:bg-red-500/10 transition-colors"></div>
-                          <div className="text-zinc-500 text-xs uppercase tracking-wider mb-2 font-medium">Before CarbonIQ</div>
-                          <div className="text-3xl font-mono font-bold text-zinc-300 line-through decoration-red-500/50">{totalCo2Before.toFixed(1)} kg</div>
-                          <div className="text-xs text-zinc-600 mt-2">Eco Score: 52</div>
-                        </div>
-                        
-                        <div className="bg-emerald-500/10 p-6 rounded-2xl border border-emerald-500/30 text-center relative overflow-hidden">
-                          <div className="absolute top-0 right-0 w-16 h-16 bg-emerald-500/20 blur-xl rounded-full"></div>
-                          <div className="text-emerald-500 text-xs uppercase tracking-wider mb-2 font-medium">After CarbonIQ</div>
-                          <div className="text-4xl font-mono font-bold text-emerald-400"><AnimatedCounter value={totalCo2After} /> kg</div>
-                          <div className="text-xs text-emerald-500/80 mt-2 font-bold flex items-center justify-center gap-1">Eco Score: <AnimatedCounter value={68} /></div>
-                        </div>
-                      </div>
-
-                      {/* Environmental Equivalents */}
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full">
-                        {[
-                          { icon: <TreePine className="w-5 h-5 text-emerald-400" />, text: "Equivalent to planting 2 trees" },
-                          { icon: <Car className="w-5 h-5 text-blue-400" />, text: "Driving 35km less" },
-                          { icon: <Recycle className="w-5 h-5 text-purple-400" />, text: "40% less plastic waste" }
-                        ].map((stat, i) => (
-                          <motion.div 
-                            key={i}
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.5 + (i * 0.1) }}
-                            className="bg-zinc-950/50 border border-zinc-800/50 p-3 rounded-xl flex items-center gap-3 text-sm text-zinc-300"
-                          >
-                            <div className="p-2 bg-zinc-900 rounded-lg border border-zinc-800">{stat.icon}</div>
-                            <span className="leading-tight text-xs">{stat.text}</span>
-                          </motion.div>
-                        ))}
-                      </div>
-
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-
-              </div>
-            </div>
+                <button 
+                  onClick={() => setStep("initial")}
+                  className="mt-auto px-6 py-3 rounded-full border border-zinc-700 text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors text-sm font-bold active:scale-95 w-full max-w-[200px] mx-auto"
+                >
+                  Reset Demo
+                </button>
+              </motion.div>
+            )}
           </div>
-
         </div>
       </div>
     </section>
