@@ -46,9 +46,9 @@ export default function Demo() {
         setActiveRecommendations(validRecs);
         
         lastAnalyzedProductIds.current = new Set(cart.map(item => item.product.id));
-      } catch (err) {
+      } catch (err: any) {
         console.error("Analysis failed:", err);
-        setError("AI analysis failed. Please ensure your Gemini API key is set in .env.local");
+        setError(err.message || "AI analysis failed. Please ensure your Gemini API key is set in .env.local");
       } finally {
         setIsAnalyzing(false);
       }
