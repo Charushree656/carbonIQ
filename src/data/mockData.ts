@@ -126,6 +126,51 @@ export const MOCK_PRODUCTS: Record<string, Product> = {
     carbonEmissions: 0.5,
     unit: "250 g",
     imageIcon: "🍃"
+  },
+  "p_beef_mince": {
+    id: "p_beef_mince",
+    name: "Minced Beef",
+    category: "Meat",
+    price: 450,
+    carbonEmissions: 26.5,
+    unit: "500 g",
+    imageIcon: "🥩"
+  },
+  "p_coffee_pods": {
+    id: "p_coffee_pods",
+    name: "Coffee Pods (Pack of 10)",
+    category: "Beverages",
+    price: 350,
+    carbonEmissions: 4.2,
+    unit: "100 g",
+    imageIcon: "☕"
+  },
+  "p_coffee_beans": {
+    id: "p_coffee_beans",
+    name: "Whole Coffee Beans",
+    category: "Beverages",
+    price: 400,
+    carbonEmissions: 1.0,
+    unit: "250 g",
+    imageIcon: "🫘"
+  },
+  "p_detergent_liquid": {
+    id: "p_detergent_liquid",
+    name: "Liquid Detergent (Plastic)",
+    category: "Household",
+    price: 220,
+    carbonEmissions: 5.5,
+    unit: "1 L",
+    imageIcon: "🧴"
+  },
+  "p_detergent_powder": {
+    id: "p_detergent_powder",
+    name: "Detergent Powder (Cardboard)",
+    category: "Household",
+    price: 190,
+    carbonEmissions: 2.1,
+    unit: "1 kg",
+    imageIcon: "🧼"
   }
 };
 

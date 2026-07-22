@@ -4,7 +4,7 @@ import { useCart } from "@/hooks/useCart";
 import { CartItem } from "@/features/cart/CartItem";
 import { SuggestionCard } from "@/features/recommendations/SuggestionCard";
 import { ImpactSummary } from "@/features/cart/ImpactSummary";
-import { ShieldCheck, ShoppingCart, Loader2, AlertCircle } from "lucide-react";
+import { ShieldCheck, ShoppingCart, Loader2, AlertCircle, Sparkles } from "lucide-react";
 import { aiService } from "@/services/aiService";
 import { Link } from "react-router-dom";
 
@@ -78,15 +78,27 @@ export default function Demo() {
             {isAnalyzing && (
               <motion.div
                 key="analyzing"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                className="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 flex items-center gap-3"
+                initial={{ opacity: 0, y: -20, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -20, scale: 0.98 }}
+                className="relative overflow-hidden bg-white dark:bg-zinc-950 border border-emerald-500/30 shadow-[0_0_15px_rgba(16,185,129,0.15)] rounded-xl p-5 flex flex-col gap-1"
               >
-                <Loader2 className="w-5 h-5 text-zinc-500 animate-spin" />
-                <h3 className="text-zinc-900 dark:text-zinc-100 font-medium">
-                  CarbonIQ AI is analyzing your cart...
-                </h3>
+                <motion.div 
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-emerald-500/10 to-transparent"
+                  animate={{ x: ["-100%", "200%"] }}
+                  transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+                />
+                <div className="flex items-center gap-3 relative z-10">
+                  <div className="p-2 bg-emerald-500/10 rounded-full">
+                    <Sparkles className="w-5 h-5 text-emerald-500 animate-pulse" />
+                  </div>
+                  <h3 className="text-zinc-900 dark:text-white font-bold text-lg tracking-tight">
+                    Optimizing your cart...
+                  </h3>
+                </div>
+                <p className="text-sm text-zinc-500 dark:text-zinc-400 relative z-10 pl-12">
+                  Scanning catalog for eco-friendly alternatives to reduce emissions.
+                </p>
               </motion.div>
             )}
 
