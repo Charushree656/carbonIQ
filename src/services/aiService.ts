@@ -1,3 +1,4 @@
+// @ts-ignore
 import { GoogleGenAI } from '@google/genai';
 import { MOCK_PRODUCTS } from '../data/mockData';
 import type { CartItemType, Recommendation } from '../types';
@@ -66,10 +67,19 @@ Return ONLY a JSON array with this exact structure for each recommendation:
         }
       });
 
-      const responseText = response.text;
+      let responseText = response.text;
       if (!responseText) return [];
       
-      const parsed = JSON.parse(responseText);
+      // Clean up potential markdown code blocks before parsing
+      responseText = responseText.replace(/```json/gi, '').replace(/```/g, '').trim();
+      
+      let parsed;
+      try {
+        parsed = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error("JSON parse error. Raw text:", responseText);
+        throw new Error("AI returned malformed JSON");
+      }
       
       // Map recommendedProductId back to actual Product objects
       const recommendations: Recommendation[] = parsed.map((item: any) => {

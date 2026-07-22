@@ -7,9 +7,6 @@ import Comparison from "@/components/sections/Comparison";
 import DashboardPreview from "@/components/sections/DashboardPreview";
 import Architecture from "@/components/sections/Architecture";
 import ExtensionDemo from "@/components/sections/ExtensionDemo";
-import BusinessVision from "@/components/sections/BusinessVision";
-import Contact from "@/components/sections/Contact";
-import CTA from "@/components/sections/CTA";
 import ChatAssistant from "@/components/sections/ChatAssistant";
 
 export default function Home() {
@@ -31,9 +28,6 @@ export default function Home() {
         <Architecture />
         <DashboardPreview />
         <ExtensionDemo />
-        <BusinessVision />
-        <Contact />
-        <CTA />
       </div>
 
       <ChatAssistant />
