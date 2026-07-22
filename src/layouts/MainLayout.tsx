@@ -52,7 +52,6 @@ export default function MainLayout() {
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
             <Link to="/" className="hover:text-zinc-400 hover:drop-shadow-[0_0_8px_rgba(52,211,153,0.5)] transition-all">Home</Link>
             <Link to="/shop" className="hover:text-zinc-400 hover:drop-shadow-[0_0_8px_rgba(52,211,153,0.5)] transition-all">Shop</Link>
-            <Link to="#features" className="hover:text-zinc-400 hover:drop-shadow-[0_0_8px_rgba(52,211,153,0.5)] transition-all">Features</Link>
             <Link to="/dashboard" className="hover:text-zinc-400 hover:drop-shadow-[0_0_8px_rgba(52,211,153,0.5)] transition-all">Dashboard</Link>
           </nav>
 
